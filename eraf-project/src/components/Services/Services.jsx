@@ -43,7 +43,7 @@ const Services = () => {
             {/* Title End */}
 
             {/* Content Start */}
-            <div className="grid grid-cols-2 gap-10 my-10">
+            <div className="grid grid-cols-2 gap-10 mt-10 ">
                 {
                     cardContent.map((card, index) => {
                         return <Card key={index} image={card.image} title={card.title} />

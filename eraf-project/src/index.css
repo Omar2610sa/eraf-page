@@ -19,7 +19,7 @@ h5 {
   font-weight: 600;
 }
 
-p{
+p {
   font-weight: 500;
 }
 
@@ -36,10 +36,14 @@ body {
   --color-title: rgba(1, 122, 155, 1);
   --color-gray: rgba(75, 75, 75, 1);
   --color-border: rgba(1, 122, 155, 1);
-  --color-bgWhite:rgba(254, 246, 246, 0.5);
-  /* Color End */
-  /* Shadow Start */
-  --shadow-primary: 0 5px 5px rgba(0, 0, 0, 0.1)
+  --color-bgWhite: rgba(254, 246, 246, 0.5);
+  --color-Black: rgba(18, 18, 18, 1);
+  --color-lightGray: rgba(138, 138, 138, 1);
+  --color-borderGray: rgba(222, 222, 222, 1);
+  --color-footer: rgba(40, 40, 40, 1);
+    /* Color End */
+    /* Shadow Start */
+    --shadow-primary: 0 5px 5px rgba(0, 0, 0, 0.1)
     /* Shadow End */
 }
 
@@ -98,11 +102,10 @@ body {
 .title-btn:hover {
   border: none;
   background-color: var(--color-third);
-
-
 }
 
 /* Btns Styles End */
+
 
 
 /* Nav bar start */
