@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+
+/* Font imports Start */
+@font-face {
+  font-family: 'URW DIN Arabic';
+  src: url('../public/fonts/alfont_com_AlFont_com_URW-DIN-Arabic.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Font imports End */
+/* Initial Font-Weight */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 600;
+}
+
+p{
+  font-weight: 500;
+}
+
+body {
+  font-family: 'URW DIN Arabic';
+}
+
+/* Roots Start */
+@theme {
+  /* Color Start */
+  --color-primry: rgba(1, 71, 85, 1);
+  --color-secondary: rgba(255, 255, 255, 1);
+  --color-third: rgba(239, 252, 255, 1);
+  --color-title: rgba(1, 122, 155, 1);
+  --color-gray: rgba(75, 75, 75, 1);
+  --color-border: rgba(1, 122, 155, 1);
+  --color-bgWhite:rgba(254, 246, 246, 0.5);
+  /* Color End */
+  /* Shadow Start */
+  --shadow-primary: 0 5px 5px rgba(0, 0, 0, 0.1)
+    /* Shadow End */
+}
+
+.container {
+  margin: auto;
+  padding: 48px 12px;
+}
+
+
+/* Roots End */
+
+
+/* Btns Styles Start */
+.primary-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  background-color: #014755;
+  padding: 12px 24px;
+  border-radius: 25px;
+  color: var(--color-secondary);
+  transition: 0.3s all ease;
+}
+
+.primary-btn:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-primry);
+}
+
+.secondary-btn {
+  background-color: var(--color-secondary);
+  padding: 12px 24px;
+  border-radius: 25px;
+  color: var(--color-primry);
+  transition: 0.3s all ease;
+}
+
+.secondary-btn:hover {
+  background-color: var(--color-third);
+}
+
+
+.title-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  background-color: var(--color-secondary);
+  border-radius: 25px;
+  border: 1px solid var(--color-border);
+  color: var(--color-primry);
+}
+
+.title-btn:hover {
+  border: none;
+  background-color: var(--color-third);
+
+
+}
+
+/* Btns Styles End */
+
+
+/* Nav bar start */
+.navBarList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.navBarList li:hover {
+  color: var(--color-primry);
+  text-decoration: underline;
+}
+
+/* Nav bar end */
