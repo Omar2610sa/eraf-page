@@ -41,9 +41,10 @@ body {
   --color-lightGray: rgba(138, 138, 138, 1);
   --color-borderGray: rgba(222, 222, 222, 1);
   --color-footer: rgba(40, 40, 40, 1);
-    /* Color End */
-    /* Shadow Start */
-    --shadow-primary: 0 5px 5px rgba(0, 0, 0, 0.1)
+  --color-text: rgba(75, 75, 75, 1);
+  /* Color End */
+  /* Shadow Start */
+  --shadow-primary: 0 5px 5px rgba(0, 0, 0, 0.1)
     /* Shadow End */
 }
 
@@ -58,7 +59,6 @@ body {
 
 /* Btns Styles Start */
 .primary-btn {
-  display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
@@ -86,6 +86,19 @@ body {
   background-color: var(--color-third);
 }
 
+.callUs-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  background-color: var(--color-secondary);
+  padding: 12px 24px;
+  border-radius: 25px;
+  color: var(--color-primry);
+  transition: 0.3s all ease;
+  width: 180px;
+  height: 56px;
+}
 
 .title-btn {
   display: flex;
@@ -97,6 +110,8 @@ body {
   border-radius: 25px;
   border: 1px solid var(--color-border);
   color: var(--color-primry);
+  width: 240px;
+  height: 56px;
 }
 
 .title-btn:hover {
@@ -119,6 +134,10 @@ body {
 .navBarList li:hover {
   color: var(--color-primry);
   text-decoration: underline;
+}
+
+.nav-btn {
+  display: none;
 }
 
 /* Nav bar end */

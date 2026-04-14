@@ -23,12 +23,12 @@ const brandImages = [
 
 const Brands = () => {
     return (
-        <section className='container'>
+        <section className='container bg-white'>
             {/* Title Start */}
-            <div className='flex flex-col justify-center items-center gap-4'>
+            <div className='flex flex-col justify-center items-center text-center gap-4'>
                 <p className="text-title">شركاء النجاح</p>
-                <h2 className="text-primry text-[48px]">نفخر بثقة شركائنا</h2>
-                <p className='text-[20px]'>شراكات تعكس التزامنا بالجودة والاحترافية في الرعاية الصحية المنزلية.</p>
+                <h2 className="text-primry text-[32px] md:text-[48px]">نفخر بثقة شركائنا</h2>
+                <p className='text-text '>شراكات تعكس التزامنا بالجودة والاحترافية في الرعاية الصحية المنزلية.</p>
             </div>
             {/* Title End */}
 

@@ -1,24 +1,25 @@
-import AboutUs from "./components/AboutUs/AboutUs"
-import Hero from "./components/Hero/Hero"
-import Navbar from "./components/Navbar/Navbar"
-import Services from "./components/Services/Services"
-import Vision from "./components/Vision/Vision"
-import Blogs from "./components/Blogs/Blogs"
-import Brands from "./components/Brands/Brands"
-import CallUs from "./components/CallUs/CallUs"
-import Footer from "./components/Footer/Footer"
+// Routes Pages 
+import Home from "./pages/Home/Home"
+import About from "./pages/About/About";
+import Service from "./pages/Services/Service";
+import Departments from "./pages/Departments/Departments";
+import Terms from "./pages/Terms/Terms";
+
+
+// Routs Hook
+import { Routes, Route } from "react-router-dom";
+
 const App = () => {
   return (
     <div dir="rtl" >
-      <Navbar />
-      <Hero />
-      <Services />
-      <AboutUs />
-      <Vision />
-      <Blogs />
-      <Brands />
-      <CallUs />
-      <Footer />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/من-نحن" element={<About />} />
+        <Route path="/Services" element={<Service />} />
+        <Route path="/Departments" element={<Departments />} />
+        <Route path="/الشروط-والأحكام" element={<Terms />} />
+        <Route path="/سياسة-الخصوصية" element={<privacy />} />
+      </Routes>
     </div>
   )
 }

@@ -4,7 +4,7 @@ import NorthWestIcon from '@mui/icons-material/NorthWest';
 
 const Card = ({ image, title }) => {
     return (
-        <div className="flex flex-col gap-[32px]">
+        <div className="flex flex-col gap-12">
             {/* Image Start */}
             <div>
                 <img src={image} alt="" />
@@ -14,7 +14,7 @@ const Card = ({ image, title }) => {
             {/* Content Start */}
             <div className="flex justify-between items-center">
                 <h3 className="text-2xl font-[600]">{title}</h3>
-                <button className="w-8 h-8 rounded-full border border-b-title flex items-center justify-center cursor-pointer hover:border-none hover:bg-third hover:duration-300">
+                <button className="w-12 h-12 md:w-8 md:h-8 rounded-full border border-b-title flex items-center justify-center cursor-pointer hover:border-none hover:bg-third hover:duration-300">
                     <NorthWestIcon  />
                 </button>            </div>
             {/* Content End */}

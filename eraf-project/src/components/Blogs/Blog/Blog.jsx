@@ -10,7 +10,7 @@ const Blog = ({ image, label, title, description, date }) => {
             {/* Image End */}
 
             {/* Content Start */}
-            <div className='flex flex-col gap-5 justify-center items-start mt-6 max-w-[400px]'>
+            <div className='flex flex-col gap-5 justify-center items-start mt-6 max-w-[326px] md:max-w-[400px]'>
                 <span className='p-2 bg-primry text-secondary rounded-xl text-[12px]'>{label}</span>
                 <h3 className='text-[22px] line group-hover:text-primry transition-colors duration-300'>{title}</h3>
                 <p className='text-lightGray text-[12px]'>{description}</p>

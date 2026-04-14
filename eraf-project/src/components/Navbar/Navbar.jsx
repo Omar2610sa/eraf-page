@@ -1,54 +1,67 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from '../../assets/images/eraf-Logo.png'
+import LanguageIcon from '../../assets/images/icons/Language.png';
+import MenuIcon from '../../assets/images/icons/menu.png';
+import CloseIcon from '@mui/icons-material/Close';
 
 
-// Material Ui imports
-import LanguageIcon from '@mui/icons-material/Language';
-
-
-
-
+// Route Link
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
+
     return (
-        <div className={'z-10 w-full bg-white fixed top-0 left-0 right-0 flex justify-between items-center px-8 py-4 shadow-primary '} dir='rtl'>
+        <div className={'z-50 w-full bg-white sticky top-0 left-0 right-0 flex justify-between items-center px-8 py-4 shadow-primary '} dir='rtl'>
 
-            {/* Logo & Nav bar */}
             <div className='flex justify-between items-center gap-3'>
-
-                {/* Logo */}
                 <div>
                     <img src={logo} width={"119px"} height={"60px"} alt='إراف' />
                 </div>
-                {/* === Logo === */}
 
-                {/* Nav Bar list */}
-                <nav className=''>
-                    <ul className='navBarList flex '>
-                        <li><a href="">الرئيسية</a></li>
-                        <li><a href="">من نحن</a></li>
-                        <li><a href="">الخدمات</a></li>
-                        <li><a href="">الإدارات</a></li>
-                        <li><a href="">المدونة</a></li>
-                        <li><a href="">إنضم إلينا</a></li>
+                <nav className='hidden md:block'>
+                    <ul className='navBarList flex'>
+                        <li><Link to="/">الرئيسية</Link></li>
+                        <li><Link to="/من-نحن">من نحن</Link></li>
+                        <li><Link to="/Services">الخدمات</Link></li>
+                        <li><Link to="/Departments">الإدارات</Link></li>
+                        <li><Link to={""}>المدونة</Link></li>
+                        <li><Link to={""}>إنضم إلينا</Link></li>
                     </ul>
                 </nav>
-                {/* === Nav Bar list === */}
             </div>
 
-            {/* === Logo & Nav bar === */}
-
-            {/* Language & Contact Btns */}
-            <div className='flex justify-between gap-10'>
-                <button className=''>
-                    <LanguageIcon className='ml-1' />
-                    العربية
+            <div className='flex justify-between items-center gap-4 md:gap-10'>
+                <button className='flex justify-between items-center gap-2'>
+                    <img src={LanguageIcon} className='md:ml-1' />
+                    <span className='hidden md:inline'>العربية</span>
                 </button>
-                <button className='primary-btn'>
+                <button className='primary-btn hidden lg:block'>
                     تواصل معانا
                 </button>
+
+                <button
+                    className='md:hidden'
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
+                    {isMenuOpen ? <CloseIcon /> : <img src={MenuIcon} />}
+                </button>
             </div>
-            {/* === Language & Contact Btns === */}
+
+            {isMenuOpen && (
+                <div className='fixed top-20 left-0 right-0 bg-white w-full h-screen md:hidden flex flex-col items-start pt-8'>
+                    <div className='w-full flex flex-col items-start mr-12 mt-12'>
+                        <Link to="/" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>الرئيسية</Link>
+                        <Link to="/من-نحن" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>من نحن</Link>
+                        <Link to="/Services" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>الخدمات</Link>
+                        <Link to="/Departments" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>الإدارات</Link>
+                        <Link to="" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>المدونة</Link>
+                        <Link to="" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>إنضم إلينا</Link>
+                        <Link to="" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full '>تواصل معانا</Link>
+
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

@@ -8,13 +8,18 @@ import snapchat from "../../assets/images/icons/jam_snapchat.png"
 import tiktok from "../../assets/images/icons/lineicons_tiktok.png"
 
 
+
+// Route Link
+import { Link } from "react-router-dom";
+
+
 const Footer = () => {
     return (
         <footer className="bg-footer text-white">
-            <div className=' flex flex-col gap-12 p-16'>
+            <div className=' flex flex-col gap-12 p-10 md:p-16'>
 
                 {/* Top Footer Start */}
-                <div className="flex justify-between items-start gap-12">
+                <div className="flex flex-col md:flex-row justify-between items-start gap-12">
 
                     {/* 1 - Logo & Description */}
                     <div className="flex flex-col justify-center items-start gap-8 max-w-[316px]">
@@ -68,11 +73,11 @@ const Footer = () => {
                 <hr />
 
                 {/* Bottom Footer */}
-                <div className="flex justify-between items-center ">
+                <div className="flex flex-col-reverse md:flex-row justify-between gap-5 md:items-start ">
                     <p>جميع الحقوق محفوظة © شركة أراف للخدمات الصحية المنزلية 2026</p>
                     <div className="flex gap-8">
-                        <a className="cursor-pointer">سياسة الخصوصية</a>
-                        <a className="cursor-pointer">شروط الاستخدام</a>
+                        <Link to="/سياسة-الخصوصية" className="cursor-pointer">سياسة الخصوصية</Link>
+                        <Link to="/الشروط-والأحكام" className="cursor-pointer">شروط الاستخدام</Link>
                     </div>
                 </div>
 

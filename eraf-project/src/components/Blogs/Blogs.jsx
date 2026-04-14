@@ -23,7 +23,7 @@ const Blogs = () => {
     image: blogImage2,
     label: "اخبار الشركة",
     title: "متى تحتاج إلى خدمات التمريض المنزلي؟",
-    description:"اكتشف الحالات التي تتطلب رعاية تمريضية منزلية، وكيف تساهم هذه الخدمة في تحسين راحة المريض وجودة الرعاية.",
+    description: "اكتشف الحالات التي تتطلب رعاية تمريضية منزلية، وكيف تساهم هذه الخدمة في تحسين راحة المريض وجودة الرعاية.",
     date: "1 ابريل 2026",
   }, {
     image: blogImage3,
@@ -34,33 +34,36 @@ const Blogs = () => {
   },]
 
   return (
-    <section className='bg-bgWhite -mt-48'>
-      <div className='container flex flex-col justify-center gap-18'>
+    <section className='bg-bgWhite'>
+      <div className='container'>
 
-        {/* Title Start */}
-        <div className="flex justify-between items-end">
-          {/* Title Content */}
-          <div className="flex flex-col gap-2">
-            <p className="text-title">المدونة</p>
-            <h2 className="text-primry text-[48px]">آخر الأخبار والمقالات الصحية</h2>
-            <p className="text-gray">آخر الأخبار والمقالات الصحية</p>
+        <div className='" flex justify-between items-start flex-col gap-6 max-w-[350px]"'>
+
+          {/* Title Start */}
+          <div className="flex justify-between items-start flex-col gap-6">
+            {/* Title Content */}
+            <div className="flex flex-col gap-2">
+              <p className="text-title">المدونة</p>
+              <h2 className="text-primry text-[32px] md:text-[48px]">آخر الأخبار والمقالات الصحية</h2>
+              <p className="text-text">محتوى طبي ونصائح صحية وتحديثات حول خدمات الرعاية المنزلية.</p>
+            </div>
+
+            {/* Title Btn */}
+            <div className="">
+              <button className="title-btn"> استكشف المقالات<NorthWestIcon /></button>
+            </div>
           </div>
 
-          {/* Title Btn */}
-          <div className="">
-            <button className="title-btn"> استكشف المقالات<NorthWestIcon /></button>
+          {/* Content Start */}
+          <div className='grid md:grid-cols-3 gap-[24px] my-5'>
+            {
+              blogCards.map((card, index) => {
+                return <Blog key={index} image={card.image} label={card.label} title={card.title} description={card.description} date={card.date} />
+              })
+            }
           </div>
+          {/* Content End */}
         </div>
-
-        {/* Content Start */}
-        <div className='grid grid-cols-3 gap-[24px] my-5'>
-          {
-            blogCards.map((card, index) => {
-              return <Blog key={index} image={card.image} label={card.label} title={card.title} description={card.description} date={card.date} />
-            })
-          }
-        </div>
-        {/* Content End */}
       </div>
 
     </section>
