@@ -5,7 +5,7 @@ import Icon2 from "../../assets/images/icons/Icon Container (3).png"
 import Icon3 from "../../assets/images/icons/Icon Container (1).png"
 import Icon4 from "../../assets/images/icons/Icon Container (2).png"
 
-const Care = () => {
+const Care = ({care}) => {
 
     const cardContent = [{
         number: "01",
@@ -35,9 +35,9 @@ const Care = () => {
         <section className="container">
             {/* Title Start */}
             <div className='flex flex-col justify-center items-center text-center gap-4'>
-                <p className="text-title">لماذا تختارنا؟</p>
-                <h2 className="text-primry text-[32px] md:text-[48px]">نسعى لرعاية صحية منزلية متميزة</h2>
-                <p className=''>نركز في إراف على تقديم رعاية احترافية وآمنة في منزلك، مع فريق طبي متخصص وتجربة سلسة ومريحة لكل المستفيدين.</p>
+                <p className="text-title">{care?.label}</p>
+                <h2 className="text-primry text-[32px] md:text-[48px]">{care?.title}</h2>
+                <p className=''>{care?.description}</p>
             </div>
             {/* Title End */}
             {/* Cards Content Start */}

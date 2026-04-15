@@ -43,9 +43,10 @@ body {
   --color-footer: rgba(40, 40, 40, 1);
   --color-text: rgba(75, 75, 75, 1);
   --color-contactForm: rgba(245, 245, 245, 1);
-    /* Color End */
-    /* Shadow Start */
-    --shadow-primary: 0 5px 5px rgba(0, 0, 0, 0.1)
+  --color-outline:rgba(1, 122, 155, 1);
+  /* Color End */
+  /* Shadow Start */
+  --shadow-primary: 0 5px 5px rgba(0, 0, 0, 0.1)
     /* Shadow End */
 }
 
@@ -143,3 +144,36 @@ body {
 }
 
 /* Nav bar end */
+
+/* Virsion Animation */
+@keyframes slideUp {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-50px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(50px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-up {
+    animation: slideUp 3s ease-in-out infinite;
+}
+
+.animate-slide-down {
+    animation: slideDown 3s ease-in-out infinite;
+}

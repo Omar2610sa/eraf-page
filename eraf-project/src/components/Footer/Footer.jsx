@@ -23,7 +23,9 @@ const Footer = () => {
 
                     {/* 1 - Logo & Description */}
                     <div className="flex flex-col justify-center items-start gap-8 max-w-[316px]">
+                        <Link to="/">
                         <img src={logo} alt="logo" />
+                        </Link>
                         <p className="text-sm leading-relaxed ">نقدّم خدمات رعاية صحية منزلية موثوقة باحترافية وجودة عالية، لنمنح مرضانا رعاية متكاملة داخل منازلهم بكل راحة وأمان.</p>
                     </div>
 

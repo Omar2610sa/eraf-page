@@ -7,7 +7,7 @@ const ScrollTop = () => {
     useEffect(() => {
         window.scrollTo({
             top: 0,
-            behavior: "smooth", // خليها smooth أو شيلها لو عايز فوري
+            behavior: "smooth", 
         });
     }, [pathname]);
 

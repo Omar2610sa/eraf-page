@@ -7,18 +7,23 @@ import Blogs from "../../components/Blogs/Blogs"
 import Brands from "../../components/Brands/Brands"
 import CallUs from "../../components/CallUs/CallUs"
 import Footer from "../../components/Footer/Footer"
+import useFetch from "@/Hooks/useFetch/useFetch";
 
 const Home = () => {
+    const { data: home, error } = useFetch("/api/client/home");
+
+    if (error) return <Error404 />;
+
     return (
         <div>
             <Navbar />
-            <Hero />
-            <Services />
-            <AboutUs />
-            <Vision />
-            <Blogs />
-            <Brands />
-            <CallUs />
+            <Hero hero={home?.hero} />
+            <Services services={home?.services} />
+            <AboutUs about={home?.about} />
+            <Vision vision={home?.partners} />
+            <Blogs blogs={home?.blogs} />
+            <Brands brands={home?.partners} />
+            <CallUs callUs={home?.banner} />
             <Footer />
         </div>
     )

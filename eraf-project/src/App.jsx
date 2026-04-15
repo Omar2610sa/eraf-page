@@ -6,6 +6,7 @@ import Departments from "./pages/Departments/Departments";
 import Terms from "./pages/Terms/Terms";
 import PrivacyPolicy from "./pages/privacyPolicy/privacyPolicy"
 import ContactUs from "./pages/ContactUs/ContactUs";
+import Error404 from "./components/Error404/Error404";
 
 // Routs Hook
 import { Routes, Route } from "react-router-dom";
@@ -23,6 +24,8 @@ const App = () => {
         <Route path="/الشروط-والأحكام" element={<Terms />} />
         <Route path="/سياسة-الخصوصية" element={<PrivacyPolicy />} />
         <Route path="/تواصل-معانا" element={<ContactUs />} />
+        <Route path="/404" element={<Error404 />} />
+
       </Routes>
     </div>
   )

@@ -16,7 +16,9 @@ const Navbar = () => {
 
             <div className='flex justify-between items-center gap-3'>
                 <div>
+                    <Link to="/">
                     <img src={logo} width={"119px"} height={"60px"} alt='إراف' />
+                    </Link>
                 </div>
 
                 <nav className='hidden md:block'>

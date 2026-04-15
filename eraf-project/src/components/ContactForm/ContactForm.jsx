@@ -25,7 +25,7 @@ const ContactForm = () => {
 
     const country = {
         name: "Saudi Arabia",
-        code: "+966",
+        code: "966+",
     };
 
     const handleInputChange = (e) => {
@@ -48,19 +48,25 @@ const ContactForm = () => {
             attachments: e.target.files,
         }));
     };
-
     const validate = () => {
         const newErrors = {};
 
         if (!formData.name.trim()) newErrors.name = "املأ الاسم";
-        if (!formData.phone.trim()) newErrors.phone = "املأ الهاتف";
+
+        if (!formData.phone.trim()) {
+            newErrors.phone = "املأ الهاتف";
+        } else if (!/^\d+$/.test(formData.phone)) {
+            newErrors.phone = "أدخل أرقام فقط";
+        } else if (formData.phone.trim().length !== 9) {
+            newErrors.phone = "يجب أن يكون الرقم 9 أرقام بالضبط";
+        }
+
         if (!formData.message.trim()) newErrors.message = "املأ الرسالة";
 
         setErrors(newErrors);
 
         return Object.keys(newErrors).length === 0;
     };
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -122,13 +128,13 @@ const ContactForm = () => {
                             <label className="block mb-2">الهاتف</label>
 
                             <div className="relative">
-                                <div className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
-                                    <img src={saudi} className="w-5 h-4" alt="saudi" />
+                                <div className="absolute left-3 top-1/2 -translate-y-1/2 border-r-1 py-3 pr-2 border-gray-300 flex flex-row-reverse items-center gap-2">
+                                    <img src={saudi} className="w-5 h-5" alt="saudi" />
                                     <span>{country.code}</span>
                                 </div>
-
                                 <input
                                     name="phone"
+                                    type="tel"
                                     value={formData.phone}
                                     onChange={handleInputChange}
                                     className={`w-full pl-20 pr-4 py-3 border rounded-lg text-right

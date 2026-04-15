@@ -4,24 +4,23 @@ import eyeFrame from "../../assets/images/vision/Eye Scan.png"
 import targetIcon from "../../assets/images/vision/Frame.png"
 
 
-const Vision = () => {
+const Vision = ({vision}) => {
     return (
         <section className='container'>
             {/* Title Start */}
             <div className='flex flex-col justify-center items-center text-center gap-4'>
-                <p className="text-title">رؤيتنا ورسالتنا</p>
-                <h2 className="text-primry text-[32px] md:text-[48px]">صحتك في أيدٍ أمينة</h2>
-                <p className='text-[20px]'>نسعى في أراف لتقديم خدمات رعاية صحية منزلية متكاملة، تهتم بجودة الرعاية وسلامة المرضى مع توفير تجربة مريحة وموثوقة للعائلات.</p>
+                <p className="text-title">{vision?.label}</p>
+                <h2 className="text-primry text-[32px] md:text-[48px]">{vision?.title}</h2>
+                <p className='text-[20px]'>{vision?.description}</p>
             </div>
             {/* Title End */}
             {/* Image Content Start */}
             <div className='relative min-h-[650px] py-8'>
                 <img className='absolute inset-0 z-0 size-full object-contain' src={frameImage} alt="" />
-                
-                {/* Cards Container */}
+
                 <div className='relative z-10 flex flex-col gap-24 md:gap-28 h-full'>
                     {/* Card 1 Start */}
-                    <div className='flex justify-start'>
+                    <div className='flex justify-start animate-slide-up'>
                         <div className='mt-42 md:mt-24 flex w-[220px] md:w-[400px] p-2 gap-2 md:p-6 md:gap-6 items-start bg-white rounded-xl shadow-lg'>
                             {/* Icon */}
                             <div>
@@ -37,8 +36,8 @@ const Vision = () => {
                     {/* Card 1 End */}
 
                     {/* Card 2 Start */}
-                    <div className='flex justify-end'>
-                        <div className='flex w-[220px] md:w-[400px] md:w-[400px] p-2 gap-2 md:p-6 md:gap-6 items-start bg-white rounded-xl shadow-lg'>
+                    <div className='flex justify-end animate-slide-down'>
+                        <div className='flex w-[220px] md:w-[400px] p-2 gap-2 md:p-6 md:gap-6 items-start bg-white rounded-xl shadow-lg'>
                             {/* Icon */}
                             <div>
                                 <img src={targetIcon} alt="targetIcon" />

@@ -11,7 +11,7 @@ import Blog from './Blog/Blog';
 
 
 
-const Blogs = () => {
+const Blogs = ({blogs}) => {
 
   const blogCards = [{
     image: blogImage1,
@@ -44,8 +44,8 @@ const Blogs = () => {
             {/* Title Content */}
             <div className="flex flex-col gap-2">
               <p className="text-title">المدونة</p>
-              <h2 className="text-primry text-[32px] md:text-[48px]">آخر الأخبار والمقالات الصحية</h2>
-              <p className="text-text">محتوى طبي ونصائح صحية وتحديثات حول خدمات الرعاية المنزلية.</p>
+              <h2 className="text-primry text-[32px] md:text-[48px]">{blogs?.title}</h2>
+              <p className="text-text">{blogs?.description}</p>
             </div>
 
             {/* Title Btn */}
@@ -57,8 +57,8 @@ const Blogs = () => {
           {/* Content Start */}
           <div className='grid md:grid-cols-3 gap-[24px] my-5'>
             {
-              blogCards.map((card, index) => {
-                return <Blog key={index} image={card.image} label={card.label} title={card.title} description={card.description} date={card.date} />
+              blogs?.features.map((card, index) => {
+                return <Blog key={index} image={card?.media} label={card?.label} title={card?.title} description={card?.description} date={card?.date} />
               })
             }
           </div>

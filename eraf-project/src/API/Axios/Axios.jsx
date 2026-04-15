@@ -1,0 +1,44 @@
+import axios from "axios";
+
+const api = axios.create({
+    baseURL: "https://api-araf.vue.aait-d.com/",
+    headers: {
+        "Accept-Language": "ar"
+    }
+});
+
+
+api.interceptors.request.use(
+    (request) => request,
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
+
+// Error Handeling
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        const status = error.response?.status;
+
+        if (status === 404) {
+            window.location.href = "/404";
+        }
+
+        if (status === 500) {
+            window.location.href = "/500";
+        }
+        if (status === 403) {
+            window.location.href = "/403";
+        }
+
+        if (status === 503) {
+            window.location.href = "/503";
+        }
+
+        return Promise.reject(error);
+    }
+);
+
+export default api;

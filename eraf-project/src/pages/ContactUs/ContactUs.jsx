@@ -14,8 +14,11 @@ import tel from "../../assets/images/icons/call clay.png"
 // import sms from "../../assets/images/icons/call clay.png"
 // import tel from "../../assets/images/icons/call clay.png"
 
+import useFetch from "@/Hooks/useFetch/useFetch";
+
 const ContactUs = () => {
 
+    const { data: contact,  } = useFetch("/api/client/contact-us");
 
     return (
         <div>
@@ -24,9 +27,9 @@ const ContactUs = () => {
             <section className='container'>
                 {/* Title Start */}
                 <div className='flex flex-col justify-center items-center text-center gap-4'>
-                    <p className="text-title">تواصل معنا</p>
-                    <h2 className="text-primry text-[32px] md:text-[48px]">احصل على دعمنا مباشرة</h2>
-                    <p className='text-[20px]'>فريقنا جاهز للرد على استفساراتك وتقديم خدمات رعاية صحية منزلية موثوقة وبأعلى جودة.</p>
+                    <p className="text-title">{contact?.data?.label}</p>
+                    <h2 className="text-primry text-[32px] md:text-[48px]">{contact?.data?.title}</h2>
+                    <p className='text-[20px]'>{contact?.data?.description}</p>
                 </div>
                 {/* Title End */}
 
