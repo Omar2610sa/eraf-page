@@ -32,15 +32,15 @@ const Footer = () => {
                         <h2 className="text-xl ">خريطة الموقع</h2>
                         <div className="flex justify-start items-start gap-10">
                             <div className="flex flex-col gap-6">
-                                <a className=" cursor-pointer">الرئيسية</a>
-                                <a className=" cursor-pointer ">من نحن</a>
-                                <a className="cursor-pointer  ">خدماتنا</a>
-                                <a className="cursor-pointer  ">الإدارات</a>
+                                <Link to="/" className=" cursor-pointer">الرئيسية</Link>
+                                <Link to="/من-نحن" className=" cursor-pointer ">من نحن</Link>
+                                <Link to="/الخدمات" className="cursor-pointer  ">خدماتنا</Link>
+                                <Link to="/الإدارات" className="cursor-pointer  ">الإدارات</Link>
                             </div>
                             <div className="flex flex-col gap-6">
-                                <a className="cursor-pointer ">المدونة</a>
-                                <a className=" cursor-pointer">أنضم الينا</a>
-                                <a className="cursor-pointer ">تواصل معنا</a>
+                                <Link to="" className="cursor-pointer ">المدونة</Link>
+                                <Link to="" className=" cursor-pointer">أنضم الينا</Link>
+                                <Link to="" className="cursor-pointer ">تواصل معنا</Link>
                             </div>
                         </div>
                     </div>
