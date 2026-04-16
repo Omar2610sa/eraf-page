@@ -4,9 +4,6 @@ import LanguageIcon from '../../assets/images/icons/Language.png';
 import MenuIcon from '../../assets/images/icons/menu.png';
 import CloseIcon from '@mui/icons-material/Close';
 
-
-
-// Route Link
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -49,28 +46,61 @@ const Navbar = () => {
                     </button>
                 </Link>
 
-                <button
-                    className='md:hidden'
-                    onClick={toggleMenu}
-                >
-                    {isMenuOpen ? <CloseIcon /> : <img src={MenuIcon} loading="lazy" />}
+                <button className='md:hidden' onClick={toggleMenu}>
+                    <img src={MenuIcon} loading="lazy" />
                 </button>
             </div>
 
-            {isMenuOpen && (
-                <div className='fixed top-20 left-0 right-0 bg-white w-full h-screen md:hidden flex flex-col items-start pt-8'>
-                    <div className='w-full flex flex-col items-start mr-12 mt-12'>
-                        <Link to="/" onClick={toggleMenu} className='text-lg py-6 w-full  border-b border-gray-200'>الرئيسية</Link>
-                        <Link to="/من-نحن" onClick={toggleMenu} className='text-lg py-6 w-full  border-b border-gray-200'>من نحن</Link>
-                        <Link to="/الخدمات" onClick={toggleMenu} className='text-lg py-6 w-full  border-b border-gray-200'>الخدمات</Link>
-                        <Link to="/الإدارات" onClick={toggleMenu} className='text-lg py-6 w-full  border-b border-gray-200'>الإدارات</Link>
-                        <Link to="/المدونة" onClick={toggleMenu} className='text-lg py-6 w-full  border-b border-gray-200'>المدونة</Link>
-                        <Link to="/إنضم-إلينا" onClick={toggleMenu} className='text-lg py-6 w-full  border-b border-gray-200'>إنضم إلينا</Link>
-                        <Link to="/تواصل-معانا" onClick={toggleMenu} className='text-lg py-6 w-full '>تواصل معانا</Link>
+            {/* Overlay */}
+            <div
+                className='fixed inset-0 bg-black md:hidden z-40'
+                style={{
+                    opacity: isMenuOpen ? 0.3 : 0,
+                    pointerEvents: isMenuOpen ? 'auto' : 'none',
+                    transition: 'opacity 0.3s ease'
+                }}
+                onClick={toggleMenu}
+            />
 
-                    </div>
+            {/* Mobile Menu */}
+            <div
+                className='fixed top-0 right-0 h-screen w-full bg-white md:hidden flex flex-col z-50'
+                style={{
+                    transform: isMenuOpen ? 'translateX(0)' : 'translateX(100%)',
+                    transition: 'transform 0.35s ease',
+                }}
+                dir='rtl'
+            >
+                {/* Header - Gradient */}
+                <div
+                    className='relative w-full flex items-center justify-center flex-shrink-0'
+                    style={{
+                        background: 'linear-gradient(180deg, #E9FBFF 0%, #FBFBFB 100%)',
+                        height: '131px',
+                    }}
+                >
+                    <img src={logo} width={"150px"} height={"56px"} alt='إراف' />
+
+                    <button
+                        onClick={toggleMenu}
+                        className='absolute left-4 top-6 flex items-center justify-center rounded-full'
+                        style={{ background: '#014755', width: '32px', height: '32px' }}
+                    >
+                        <CloseIcon style={{ color: 'white', fontSize: '24px' }} />
+                    </button>
                 </div>
-            )}
+
+                {/* القائمة */}
+                <div className='w-full flex flex-col items-end px-4 mt-10 font-semibold text-lg'>
+                    <Link to="/" onClick={toggleMenu} className='p-6 w-full text-right border-b border-gray-200' >الرئيسية</Link>
+                    <Link to="/من-نحن" onClick={toggleMenu} className='p-6 w-full text-right border-b border-gray-200' >من نحن</Link>
+                    <Link to="/الخدمات" onClick={toggleMenu} className='p-6 w-full text-right border-b border-gray-200' >الخدمات</Link>
+                    <Link to="/الإدارات" onClick={toggleMenu} className='p-6 w-full text-right border-b border-gray-200' >الإدارات</Link>
+                    <Link to="/المدونة" onClick={toggleMenu} className='p-6 w-full text-right border-b border-gray-200' >المدونة</Link>
+                    <Link to="/إنضم-إلينا" onClick={toggleMenu} className='p-6 w-full text-right border-b border-gray-200' >إنضم إلينا</Link>
+                    <Link to="/تواصل-معانا" onClick={toggleMenu} className='p-6 w-full text-right' >تواصل معانا</Link>
+                </div>
+            </div>
         </div>
     )
 }
