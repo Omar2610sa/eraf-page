@@ -14,6 +14,7 @@ const Departments = lazy(() => import("./pages/Departments/Departments"));
 const Terms = lazy(() => import("./pages/Terms/Terms"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy/PrivacyPolicy.jsx"));
 const Error404 = lazy(() => import("./components/Error404/Error404"));
+const SeverNotFound = lazy(() => import("./SeverNotFound/SeverNotFound"));
 const JoinUs = lazy(() => import("./pages/JoinUs.jsx/JoinUs"));
 
 const Loading = lazy(() => import("./components/Loading/Loading"));
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="/سياسة-الخصوصية" element={<PrivacyPolicy />} />
           <Route path="/تواصل-معانا" element={<ContactUs />} />
           <Route path="/404" element={<Error404 />} />
+          <Route path="/server-not-found" element={<SeverNotFound />} />
           <Route path="/المدونة" element={<Blogs />} />
           <Route path="/إنضم-إلينا" element={<JoinUs />} />
           <Route path="/blog/:id" element={<BlogDetails />} />

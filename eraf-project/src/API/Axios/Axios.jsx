@@ -2,6 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
     baseURL: "https://api-araf.vue.aait-d.com/",
+    timeout: 10000,
     headers: {
         "Accept-Language": "ar"
     }
