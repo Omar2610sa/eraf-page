@@ -3,6 +3,9 @@ import NorthWestIcon from "@mui/icons-material/NorthWest";
 import Error404 from "../../components/Error404/Error404"
 import ServicesCards from "./ServicesCards";
 
+import { Link } from "react-router-dom";
+
+
 const Services = ({ services }) => {
 
 
@@ -21,9 +24,11 @@ const Services = ({ services }) => {
                 </div>
 
                 <div>
-                    <button className="title-btn">
-                        استكشف خدماتنا <NorthWestIcon />
-                    </button>
+                    <Link to="/الخدمات">
+                        <button className="title-btn">
+                            استكشف خدماتنا <NorthWestIcon />
+                        </button>
+                    </Link>
                 </div>
             </div>
 

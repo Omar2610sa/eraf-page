@@ -40,9 +40,9 @@ const Footer = () => {
                                 <Link to="/الإدارات" className="cursor-pointer  ">الإدارات</Link>
                             </div>
                             <div className="flex flex-col gap-6">
-                                <Link to="" className="cursor-pointer ">المدونة</Link>
-                                <Link to="" className=" cursor-pointer">أنضم الينا</Link>
-                                <Link to="" className="cursor-pointer ">تواصل معنا</Link>
+                                <Link to="/المدونة" className="cursor-pointer ">المدونة</Link>
+                                <Link to="/إنضم-إلينا" className=" cursor-pointer">أنضم الينا</Link>
+                                <Link to="/تواصل-معانا" className="cursor-pointer ">تواصل معنا</Link>
                             </div>
                         </div>
                     </div>

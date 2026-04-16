@@ -1,10 +1,13 @@
+// Route Link
+import { Link } from "react-router-dom";
 
-const Hero = ({hero}) => {
-    console.log(hero)
+
+
+const Hero = ({ hero }) => {
     return (
         <div className="relative z-40 w-full md:h-[calc(100vh-92px)] h-[calc(80vh-92px)] overflow-hidden">
 
-            <video autoPlay muted loop className="absolute top-0 left-0 w-full h-full object-cover z-30" src={hero?.media?.media_url}/>
+            <video autoPlay muted loop className="absolute top-0 left-0 w-full h-full object-cover z-30" src={hero?.media?.media_url} />
 
             <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/50 z-30 "></div>
 
@@ -15,8 +18,12 @@ const Hero = ({hero}) => {
                     <p className="text-[16px] leading-relaxed">{hero?.description}</p>
 
                     <div className="flex gap-6 md:gap-4 ">
-                        <button className='primary-btn'>استكشف خدماتنا</button>
-                        <button className="secondary-btn">تواصل معنا</button>
+                        <Link to="/الخدمات">
+                            <button className='primary-btn'>استكشف خدماتنا</button>
+                        </Link>
+                        <Link to="/تواصل-معانا">
+                            <button className="secondary-btn">تواصل معنا</button>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -32,16 +32,16 @@ const Care = ({care}) => {
         description: "نحرص على تطوير خدماتنا باستمرار باستخدام أحدث التقنيات الطبية",
     },]
     return (
-        <section className="container">
+        <section className="container flex flex-col gap-8">
             {/* Title Start */}
-            <div className='flex flex-col justify-center items-center text-center gap-4'>
+            <div className='flex flex-col justify-center items-center text-center gap-4 '>
                 <p className="text-title">{care?.label}</p>
                 <h2 className="text-primry text-[32px] md:text-[48px]">{care?.title}</h2>
                 <p className=''>{care?.description}</p>
             </div>
             {/* Title End */}
             {/* Cards Content Start */}
-            <div className="grid md:grid-cols-4 gap-10 px-10 md:gap-8 my-30">
+            <div className="grid md:grid-cols-4 gap-10  md:gap-8">
                 {/* Card */}
                 {
                     cardContent.map((card, index) => {

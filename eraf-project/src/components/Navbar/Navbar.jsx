@@ -17,7 +17,7 @@ const Navbar = () => {
             <div className='flex justify-between items-center gap-3'>
                 <div>
                     <Link to="/">
-                    <img src={logo} width={"119px"} height={"60px"} alt='إراف' />
+                        <img src={logo} width={"119px"} height={"60px"} alt='إراف' />
                     </Link>
                 </div>
 
@@ -27,8 +27,8 @@ const Navbar = () => {
                         <li><Link to="/من-نحن">من نحن</Link></li>
                         <li><Link to="/الخدمات">الخدمات</Link></li>
                         <li><Link to="/الإدارات">الإدارات</Link></li>
-                        <li><Link to={""}>المدونة</Link></li>
-                        <li><Link to={""}>إنضم إلينا</Link></li>
+                        <li><Link to="/المدونة">المدونة</Link></li>
+                        <li><Link to="/إنضم-إلينا">إنضم إلينا</Link></li>
                     </ul>
                 </nav>
             </div>
@@ -39,16 +39,16 @@ const Navbar = () => {
                     <span className='hidden md:inline'>العربية</span>
                 </button>
                 <Link to="/تواصل-معانا">
-                <button className='primary-btn hidden lg:block'>
-                    تواصل معانا
-                </button>
+                    <button className='primary-btn hidden lg:block'>
+                        تواصل معانا
+                    </button>
                 </Link>
 
                 <button
                     className='md:hidden'
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
-                    {isMenuOpen ? <CloseIcon /> : <img src={MenuIcon} />}
+                    {isMenuOpen ? <CloseIcon /> : <img src={MenuIcon} loading="lazy" />}
                 </button>
             </div>
 
@@ -58,9 +58,9 @@ const Navbar = () => {
                         <Link to="/" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>الرئيسية</Link>
                         <Link to="/من-نحن" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>من نحن</Link>
                         <Link to="/الخدمات" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>الخدمات</Link>
-                        <Link to="/Departments" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>الإدارات</Link>
-                        <Link to="" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>المدونة</Link>
-                        <Link to="" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>إنضم إلينا</Link>
+                        <Link to="/الإدارات" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>الإدارات</Link>
+                        <Link to="/المدونة" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>المدونة</Link>
+                        <Link to="/إنضم-إلينا" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>إنضم إلينا</Link>
                         <Link to="/تواصل-معانا" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full '>تواصل معانا</Link>
 
                     </div>
