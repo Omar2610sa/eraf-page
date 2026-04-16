@@ -9,6 +9,7 @@ import tiktok from "../../assets/images/icons/lineicons_tiktok.png"
 
 
 
+import { memo } from 'react';
 // Route Link
 import { Link } from "react-router-dom";
 
@@ -88,4 +89,4 @@ const Footer = () => {
     )
 }
 
-export default Footer
+export default memo(Footer)

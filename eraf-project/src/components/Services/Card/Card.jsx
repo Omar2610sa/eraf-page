@@ -7,7 +7,7 @@ const Card = ({ image, title }) => {
         <div className="flex flex-col gap-12">
             {/* Image Start */}
             <div>
-                <img src={image} alt="" />
+                <img src={image} loading="lazy" alt="" />
             </div>
             {/* Image End */}
 

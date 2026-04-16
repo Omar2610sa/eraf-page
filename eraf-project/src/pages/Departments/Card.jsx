@@ -1,11 +1,11 @@
-import React from 'react'
+
 
 const Card = ({ image, title, description }) => {
   return (
     <div className='p-4 flex flex-col gap-4'>
       {/* Image */}
       <div>
-        <img src={image}  alt="" />
+        <img src={image} loading="lazy" alt="" />
       </div>
       {/* Contet */}
       <div className='flex flex-col justify-center items-center gap-2'>

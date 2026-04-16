@@ -1,20 +1,17 @@
-// Imports components
+import { useState, useCallback, memo } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import ServicesCards from "../../components/Services/ServicesCards";
 import Footer from "../../components/Footer/Footer";
-
-// Hooks
-import { useState } from "react";
 import useFetch from "@/Hooks/useFetch/useFetch";
 
 // MUI
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+import { useTheme, createTheme } from "@mui/material/styles";
 
-// Theme
+// Theme (hoisted static)
 const themeConfig = createTheme({
     palette: {
         primary: {
@@ -31,12 +28,10 @@ const Service = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-    const handleChange = (event, value) => {
+    const handleChange = useCallback((event, value) => {
         setPage(value);
+    }, []);
 
-        
-        // console.log("Current page:", value);
-    };
 
     return (
         <div>
@@ -83,4 +78,4 @@ const Service = () => {
     );
 };
 
-export default Service;
+export default memo(Service);

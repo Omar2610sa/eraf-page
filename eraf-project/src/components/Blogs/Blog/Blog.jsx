@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Link } from "react-router-dom";
 import calender from "../../../assets/images/blogs/calendar-2.png";
 
@@ -31,7 +32,7 @@ const Blog = ({ id, image, label, title, description, date }) => {
                     </p>
 
                     <p className="flex items-center text-[14px] text-lightGray">
-                        <img className="w-5 h-5 ml-1" src={calender} alt="calender" />
+                        <img className="w-5 h-5 ml-1" src={calender} alt="calender" loading="lazy" />
                         {date || "غير محدد"}
                     </p>
 
@@ -42,4 +43,4 @@ const Blog = ({ id, image, label, title, description, date }) => {
     );
 };
 
-export default Blog;
+export default memo(Blog);

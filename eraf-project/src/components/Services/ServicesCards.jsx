@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Card from "./Card/Card";
 
 const ServicesCards = ({ services }) => {
@@ -10,13 +11,10 @@ const ServicesCards = ({ services }) => {
                         image={service.media}
                         title={service.title}
                     />
-
-
-                ))
-                }
+                ))}
             </div>
         </div>
     )
 }
 
-export default ServicesCards
+export default memo(ServicesCards)

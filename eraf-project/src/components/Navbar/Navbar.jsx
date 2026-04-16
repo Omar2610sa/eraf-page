@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import { useState, useCallback } from 'react'
 import logo from '../../assets/images/eraf-Logo.png'
 import LanguageIcon from '../../assets/images/icons/Language.png';
 import MenuIcon from '../../assets/images/icons/menu.png';
 import CloseIcon from '@mui/icons-material/Close';
+
 
 
 // Route Link
@@ -10,6 +11,10 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+    const toggleMenu = useCallback(() => {
+        setIsMenuOpen(prev => !prev);
+    }, []);
 
     return (
         <div className={'z-50 w-full bg-white sticky top-0 left-0 right-0 flex justify-between items-center px-8 py-4 shadow-primary '} dir='rtl'>
@@ -46,7 +51,7 @@ const Navbar = () => {
 
                 <button
                     className='md:hidden'
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    onClick={toggleMenu}
                 >
                     {isMenuOpen ? <CloseIcon /> : <img src={MenuIcon} loading="lazy" />}
                 </button>
@@ -55,13 +60,13 @@ const Navbar = () => {
             {isMenuOpen && (
                 <div className='fixed top-20 left-0 right-0 bg-white w-full h-screen md:hidden flex flex-col items-start pt-8'>
                     <div className='w-full flex flex-col items-start mr-12 mt-12'>
-                        <Link to="/" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>الرئيسية</Link>
-                        <Link to="/من-نحن" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>من نحن</Link>
-                        <Link to="/الخدمات" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>الخدمات</Link>
-                        <Link to="/الإدارات" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>الإدارات</Link>
-                        <Link to="/المدونة" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>المدونة</Link>
-                        <Link to="/إنضم-إلينا" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full  border-b border-gray-200'>إنضم إلينا</Link>
-                        <Link to="/تواصل-معانا" onClick={() => setIsMenuOpen(false)} className='text-lg py-6 w-full '>تواصل معانا</Link>
+                        <Link to="/" onClick={toggleMenu} className='text-lg py-6 w-full  border-b border-gray-200'>الرئيسية</Link>
+                        <Link to="/من-نحن" onClick={toggleMenu} className='text-lg py-6 w-full  border-b border-gray-200'>من نحن</Link>
+                        <Link to="/الخدمات" onClick={toggleMenu} className='text-lg py-6 w-full  border-b border-gray-200'>الخدمات</Link>
+                        <Link to="/الإدارات" onClick={toggleMenu} className='text-lg py-6 w-full  border-b border-gray-200'>الإدارات</Link>
+                        <Link to="/المدونة" onClick={toggleMenu} className='text-lg py-6 w-full  border-b border-gray-200'>المدونة</Link>
+                        <Link to="/إنضم-إلينا" onClick={toggleMenu} className='text-lg py-6 w-full  border-b border-gray-200'>إنضم إلينا</Link>
+                        <Link to="/تواصل-معانا" onClick={toggleMenu} className='text-lg py-6 w-full '>تواصل معانا</Link>
 
                     </div>
                 </div>

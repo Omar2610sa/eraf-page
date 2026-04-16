@@ -30,8 +30,9 @@ const handleCopy = async () => {
         }, 2000);
 
     } catch (err) {
-        console.error("Copy failed:", err);
+        alert(err)
     }
+
 };
 
     return (

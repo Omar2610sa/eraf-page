@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import Card from "./Card/Card";
 import NorthWestIcon from "@mui/icons-material/NorthWest";
 import Error404 from "../../components/Error404/Error404"
@@ -38,4 +39,4 @@ const Services = ({ services }) => {
     );
 };
 
-export default Services;
+export default memo(Services);
