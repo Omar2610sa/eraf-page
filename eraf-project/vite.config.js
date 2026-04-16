@@ -13,5 +13,15 @@ export default defineConfig({
     alias:{
       "@":path.resolve(__dirname, "./src")
     }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          swiper: ['swiper/react', 'swiper/modules'],
+          mui: ['@mui/material', '@mui/icons-material']
+        }
+      }
+    }
   }
 })

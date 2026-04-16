@@ -1,10 +1,15 @@
 import { OrbitProgress } from "react-loading-indicators";
-
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 const Loading = () => {
   return (
-    <div className="w-full h-screen flex justify-center bg-Black items-center">
+    <>
+    <Navbar />
+    <div className="w-full h-screen flex justify-center items-center">
         <OrbitProgress dense color="rgba(1, 71, 85, 1)" size="large" text="تحميل" textColor="" />
     </div>
+    <Footer />
+    </>
   )
 }
 

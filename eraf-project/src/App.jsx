@@ -1,22 +1,22 @@
 // Routes Pages 
 import { lazy, Suspense } from "react";
-import Home from "./pages/Home/Home"
-import About from "./pages/About/About";
-import Service from "./pages/Services/Service";
-import Blogs from "./pages/Blogs/Blogs";
-import BlogDetails from "./pages/BlogDetails/BlogsDetails";
-import ContactUs from "./pages/ContactUs/ContactUs";
-import ScrollTop from "./components/ScrollTop/ScrollTop";
+const Home = lazy(() => import("./pages/Home/Home"))
+const About = lazy(() => import("./pages/About/About"));
+const Service = lazy(() => import("./pages/Services/Service"));
+const Blogs = lazy(() => import("./pages/Blogs/Blogs"));
+const BlogDetails = lazy(() => import("./pages/BlogDetails/BlogsDetails"));
+const ContactUs = lazy(() => import("./pages/ContactUs/ContactUs"));
+const ScrollTop = lazy(() => import("./components/ScrollTop/ScrollTop"));
 // Routs Hook
 import { Routes, Route } from "react-router-dom";
 
 const Departments = lazy(() => import("./pages/Departments/Departments"));
 const Terms = lazy(() => import("./pages/Terms/Terms"));
-const PrivacyPolicy = lazy(() => import("./pages/privacyPolicy/privacyPolicy"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy/PrivacyPolicy.jsx"));
 const Error404 = lazy(() => import("./components/Error404/Error404"));
 const JoinUs = lazy(() => import("./pages/JoinUs.jsx/JoinUs"));
 
-import Loading from "./components/Loading/Loading";
+const Loading = lazy(() => import("./components/Loading/Loading"));
 
 const App = () => {
   return (
