@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
     baseURL: "https://api-araf.vue.aait-d.com/",
-    timeout: 10000,
+    
     headers: {
         "Accept-Language": "ar"
     }
@@ -32,10 +32,6 @@ api.interceptors.response.use(
         }
         if (status === 403) {
             window.location.href = "/403";
-        }
-
-        if (status === 503) {
-            window.location.href = "/503";
         }
 
         return Promise.reject(error);
