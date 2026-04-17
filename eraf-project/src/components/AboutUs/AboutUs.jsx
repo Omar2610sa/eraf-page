@@ -1,6 +1,4 @@
-// Images Imports
-import mainImage from "../../assets/images/about/Images (1).png"
-
+import { Link } from "react-router-dom";
 
 // Materinal UI
 import NorthWestIcon from '@mui/icons-material/NorthWest';
@@ -16,7 +14,9 @@ const AboutUs = ({about}) => {
                         <h2 className="text-primry text-[48px]">{about?.title}</h2>
                         <p>{about?.description}</p>
                     </div>
+                    <Link to="/من-نحن">
                     <button className='primary-btn'>تعرف علينا <NorthWestIcon /></button>
+                    </Link>
                 </div>
                 {/* Content End */}
 

@@ -175,7 +175,7 @@ const ContactForm = () => {
                             إرفاق ملفات (اختياري)
                         </label>
 
-                        <label className="flex items-center justify-center gap-2 p-4 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-teal-500 hover:bg-teal-50 transition">
+                        <label className="flex items-center justify-center gap-2 px-4 py-6 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-teal-500 hover:bg-teal-50 transition">
 
                             <div className="flex flex-col justify-center items-center gap-2">
                                 <img src={cloud} className="w-5 h-5" alt="" />

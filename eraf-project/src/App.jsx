@@ -5,6 +5,7 @@ const About = lazy(() => import("./pages/About/About"));
 const Service = lazy(() => import("./pages/Services/Service"));
 const Blogs = lazy(() => import("./pages/Blogs/Blogs"));
 const BlogDetails = lazy(() => import("./pages/BlogDetails/BlogsDetails"));
+const ServiceDetails = lazy(() => import("./pages/ServiceDetails/ServiceDetails"));
 const ContactUs = lazy(() => import("./pages/ContactUs/ContactUs"));
 const ScrollTop = lazy(() => import("./components/ScrollTop/ScrollTop"));
 // Routs Hook
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/server-not-found" element={<SeverNotFound />} />
           <Route path="/المدونة" element={<Blogs />} />
           <Route path="/إنضم-إلينا" element={<JoinUs />} />
+          <Route path="/الخدمات/:id" element={<ServiceDetails />} />
           <Route path="/blog/:id" element={<BlogDetails />} />
         </Routes>
       </Suspense>

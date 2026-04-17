@@ -22,7 +22,7 @@ const Brands = ({ brands }) => {
                     speed={2000}
                     autoplay={{
                         delay: 2500,
-                        disableOnInteraction: false,
+                        disableOnInteraction: false
                     }}
                     slidesPerView={4}
                     spaceBetween={16}
