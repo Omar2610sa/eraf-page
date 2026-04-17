@@ -6,6 +6,7 @@ import NorthWestIcon from '@mui/icons-material/NorthWest';
 import Blog from './Blog/Blog';
 import BlogsCards from './BlogsCards';
 
+import { Link } from "react-router-dom";
 
 
 const Blogs = ({blogs}) => {
@@ -28,7 +29,9 @@ const Blogs = ({blogs}) => {
 
             {/* Title Btn */}
             <div className="">
+              <Link to="/المدونة">
               <button className="title-btn"> استكشف المقالات<NorthWestIcon /></button>
+              </Link>
             </div>
           </div>
 

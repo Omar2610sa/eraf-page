@@ -151,7 +151,7 @@ body {
 /* Virsion Animation */
 @keyframes slideUp {
   0% {
-    transform: translateY(120px);
+    transform: translateY(0px);
   }
 
   50% {
@@ -159,13 +159,13 @@ body {
   }
 
   100% {
-    transform: translateY(120px);
+    transform: translateY(0px);
   }
 }
 
 @keyframes slideDown {
   0% {
-    transform: translateY(-120px);
+    transform: translateY(0px);
   }
 
   50% {
@@ -173,7 +173,7 @@ body {
   }
 
   100% {
-    transform: translateY(-120px);
+    transform: translateY(0px);
   }
 }
 

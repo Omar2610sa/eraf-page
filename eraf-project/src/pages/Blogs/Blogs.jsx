@@ -9,17 +9,32 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 
 // Imports Hooks
 import useFetch from "@/Hooks/useFetch/useFetch";
+import { useState, useCallback } from "react";
+
 
 // Material Ui
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
+import { ThemeProvider } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme, createTheme } from "@mui/material/styles";
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 
 const Blogs = () => {
     const { data: blogs, } = useFetch("/api/client/blogs");
-    const theme = createTheme({
+
+    const [page, setPage] = useState(1);
+
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+    const handleChange = useCallback((event, value) => {
+        setPage(value);
+    }, []);
+
+    const themeConfig = createTheme({
         palette: {
             primary: {
                 main: "rgba(1, 122, 155, 1)",
@@ -81,12 +96,20 @@ const Blogs = () => {
                 {/* Toggle Btns */}
 
                 {/* Toggles btns */}
-                <div className="flex justify-center items-center mt-20" dir="ltr" >
+                <div className="flex justify-center items-center mt-20" dir="ltr">
                     <Stack spacing={1}>
-                        <ThemeProvider theme={theme}>
-                            <Pagination count={13} size="large" color="primary" />
-                        </ThemeProvider>
+                        <ThemeProvider theme={themeConfig}>
 
+                            <Pagination
+                                page={page}
+                                onChange={handleChange}
+                                count={13}
+                                size="large"
+                                color="primary"
+                                siblingCount={isMobile ? 0 : 1}
+                            />
+
+                        </ThemeProvider>
                     </Stack>
                 </div>
 
