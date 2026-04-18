@@ -32,7 +32,7 @@ const Service = () => {
         setPage(value);
     }, []);
 
-    const itemsPerPage = 6;
+    const itemsPerPage = 8;
 
     const paginatedServices = {
         ...services,

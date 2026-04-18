@@ -7,6 +7,7 @@ import instagram from "../../assets/images/icons/ri_instagram-fill.png"
 import snapchat from "../../assets/images/icons/jam_snapchat.png"
 import tiktok from "../../assets/images/icons/lineicons_tiktok.png"
 
+import logoos from "../../assets/images/logooos.png"
 
 
 import { memo } from 'react';
@@ -16,16 +17,24 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
-        <footer className="bg-footer text-white">
+        <footer className="bg-footer text-white relative overflow-hidden" >
+            {/* background pattern */}
+            <div
+                className="absolute inset-0 pointer-events-none opacity-10 bg-repeat-y md:bg-repeat-x bg-[length:390px] md:bg-[300px]"
+                style={{
+                    backgroundImage: `url(${logoos})`,
+                    backgroundPosition: "center",
+                }}
+            />
             <div className=' flex flex-col gap-12 p-10 md:p-16'>
 
                 {/* Top Footer Start */}
-                <div className="flex flex-col md:flex-row justify-between items-start gap-12">
+                <div className="flex flex-col md:flex-row justify-between items-start gap-10">
 
                     {/* 1 - Logo & Description */}
                     <div className="flex flex-col justify-center items-start gap-8 max-w-[316px]">
                         <Link to="/">
-                        <img src={logo} alt="logo" />
+                            <img src={logo} alt="logo" />
                         </Link>
                         <p className="text-sm leading-relaxed ">نقدّم خدمات رعاية صحية منزلية موثوقة باحترافية وجودة عالية، لنمنح مرضانا رعاية متكاملة داخل منازلهم بكل راحة وأمان.</p>
                     </div>
@@ -52,9 +61,18 @@ const Footer = () => {
                     <div className="flex flex-col gap-8 ">
                         <h2 className="text-xl ">معلومات التواصل</h2>
                         <div className="flex flex-col gap-6">
-<img src={tel} className="ml-2 w-4" alt="phone" loading="lazy" />+966 0500012454
-<img src={email} className="ml-2 w-4" alt="email" loading="lazy" />info@araf.com
-<img src={location} className="ml-2 w-4" alt="location" loading="lazy" />الرياض، المملكة العربية السعودية
+                            <div className="flex">
+                                <img src={tel} className="ml-2 w-6 h-6" alt="phone" loading="lazy" />
+                                +966 0500012454
+
+                            </div>
+                            <div className="flex">
+
+                                <img src={email} className="ml-2 w-6 h-6" alt="email" loading="lazy" />info@araf.com
+                            </div>
+                            <div className="flex">
+                                <img src={location} className="ml-2 w-6 h-6" alt="location" loading="lazy" />الرياض، المملكة العربية السعودية
+                            </div>
                         </div>
                     </div>
 
@@ -63,10 +81,10 @@ const Footer = () => {
                         <h2 className="text-xl ">تابعنا علي</h2>
                         <div className="flex justify-between items-center gap-5">
                             {/* Icons */}
-                            <img className="w-6 h-6" src={facebook} alt="facebook" />
-                            <img className="w-6 h-6" src={instagram} alt="instagram" />
-                            <img className="w-6 h-6" src={snapchat} alt="snapchat" />
-                            <img className="w-6 h-6" src={tiktok} alt="tiktok" />
+                            <img className="w-7 h-7" src={facebook} alt="facebook" />
+                            <img className="w-7 h-7" src={instagram} alt="instagram" />
+                            <img className="w-7 h-7" src={snapchat} alt="snapchat" />
+                            <img className="w-7 h-7" src={tiktok} alt="tiktok" />
                         </div>
                     </div>
 

@@ -175,7 +175,7 @@ const ContactForm = () => {
                             إرفاق ملفات (اختياري)
                         </label>
 
-                        <label className="flex items-center justify-center gap-2 py-8 md:py-20 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-teal-500 hover:bg-teal-50 transition">
+                        <label className="flex items-center justify-center gap-2 py-8  border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-teal-500 hover:bg-teal-50 transition">
 
                             <div className="flex flex-col justify-center items-center gap-2">
                                 <img src={cloud} className="w-5 h-5" alt="" />
@@ -208,8 +208,8 @@ const ContactForm = () => {
                 </div>
 
                 {/* MAP */}
-                <div className="rounded-3xl overflow-hidden">
-                    <img src={map} className="w-full md:h-[800px] object-cover" alt="map" />
+                <div className="rounded-3xl overflow-hidden ">
+                    <img src={map} className="w-full md:h-full object-cover" alt="map" />
                 </div>
 
             </div>

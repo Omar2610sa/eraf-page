@@ -19,10 +19,10 @@ const Brands = ({ brands }) => {
             <div className="mt-30">
                 <Swiper
                     loop={true}
-                    speed={2000}
+                    speed={800}
                     autoplay={{
-                        delay: 2500,
-                        disableOnInteraction: false
+                        delay: 1500,
+                        disableOnInteraction: false,
                     }}
                     slidesPerView={4}
                     spaceBetween={16}

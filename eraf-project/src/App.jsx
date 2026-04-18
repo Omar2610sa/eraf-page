@@ -22,7 +22,7 @@ const Loading = lazy(() => import("./components/Loading/Loading"));
 
 const App = () => {
   return (
-    <div dir="rtl" >
+    <div dir="rtl" className="bg-white" >
       <ScrollTop />
       <Suspense fallback={<Loading />}>
         <Routes>
