@@ -7,8 +7,8 @@ const Card = ({ image, title, id }) => {
     return (
         <div className="flex flex-col gap-12">
             {/* Image Start */}
-            <div>
-                <img src={image} loading="lazy" alt="" />
+            <div className="w-full h-[250px] overflow-hidden rounded-xl">
+                <img src={image} className="w-full h-full object-cover" width="400" height="250" loading="lazy" alt="" />
             </div>
             {/* Image End */}
 

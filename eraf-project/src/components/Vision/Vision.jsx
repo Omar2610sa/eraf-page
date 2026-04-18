@@ -16,7 +16,7 @@ const Vision = ({vision}) => {
             {/* Title End */}
             {/* Image Content Start */}
             <div className='relative min-h-[650px] py-8'>
-                <img className='absolute inset-0 z-0 size-full object-contain' src={frameImage} alt="" />
+                <img className='absolute inset-0 z-0 w-full h-full object-contain' src={frameImage} alt="" loading="eager" />
 
                 <div className='relative z-10 flex flex-col gap-24 md:gap-28 h-full'>
                     {/* Card 1 Start */}
@@ -24,7 +24,7 @@ const Vision = ({vision}) => {
                         <div className='mt-42 md:mt-24 flex w-[220px] md:w-[400px] p-2 gap-2 md:p-6 md:gap-6 items-start bg-white rounded-xl shadow-lg'>
                             {/* Icon */}
                             <div>
-                                <img src={eyeFrame} alt="eyeFrame" />
+                                <img className="w-16 h-16 object-contain" src={eyeFrame} alt="eyeFrame" loading="eager" />
                             </div>
                             {/* Content */}
                             <div className='flex flex-col justify-center items-start gap-2'>
@@ -40,7 +40,7 @@ const Vision = ({vision}) => {
                         <div className='flex w-[220px] md:w-[400px] p-2 gap-2 md:p-6 md:gap-6 items-start bg-white rounded-xl shadow-lg'>
                             {/* Icon */}
                             <div>
-                                <img src={targetIcon} alt="targetIcon" />
+                                <img className="w-16 h-16 object-contain" src={targetIcon} alt="targetIcon" loading="eager" />
                             </div>
                             {/* Content */}
                             <div className='flex flex-col justify-center items-start gap-2'>

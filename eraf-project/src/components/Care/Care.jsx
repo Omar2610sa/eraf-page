@@ -41,7 +41,7 @@ const Care = ({care}) => {
             </div>
             {/* Title End */}
             {/* Cards Content Start */}
-            <div className="grid md:grid-cols-4 gap-10  md:gap-8">
+            <div className="grid md:grid-cols-4 justify-center gap-10  md:gap-8">
                 {/* Card */}
                 {
                     cardContent.map((card, index) => {

@@ -10,8 +10,11 @@ const Blog = ({ id, image, label, title, description, date }) => {
                 {/* Image */}
                 <div className='overflow-hidden rounded-xl'>
                     <img
-                        className='w-full group-hover:scale-105 transition-transform duration-300'
+                        className='w-full h-[200px] object-cover group-hover:scale-105 transition-transform duration-300'
                         src={image}
+                        width={400} 
+                        height={200}
+                        loading="lazy"
                         alt=""
                     />
                 </div>

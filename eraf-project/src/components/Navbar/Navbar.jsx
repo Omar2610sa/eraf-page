@@ -37,7 +37,7 @@ const Navbar = () => {
 
             <div className='flex justify-between items-center gap-4 md:gap-10'>
                 <button className='flex justify-between items-center gap-2'>
-<img src={LanguageIcon} className='md:ml-1' loading="lazy" />
+                    <img src={LanguageIcon} className='w-6 h-6 md:ml-1 object-contain' width={24} height={24} loading="lazy" alt="language" />
                     <span className='hidden md:inline'>العربية</span>
                 </button>
                 <Link to="/تواصل-معانا">
@@ -47,7 +47,7 @@ const Navbar = () => {
                 </Link>
 
                 <button className='md:hidden' onClick={toggleMenu}>
-<img src={MenuIcon} loading="lazy" alt="menu" />
+<img src={MenuIcon} className="w-6 h-6 object-contain" width={24} height={24} loading="lazy" alt="menu" />
                 </button>
             </div>
 
