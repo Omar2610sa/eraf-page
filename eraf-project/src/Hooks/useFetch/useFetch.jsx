@@ -12,6 +12,9 @@ const useFetch = (endpoint) => {
             .then((res) => {
                 setData(res.data.data);
             })
+            .catch((err) => {
+                setError(err.message || err);
+            });
 
     }, [endpoint]);
 

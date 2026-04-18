@@ -17,9 +17,13 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          swiper: ['swiper/react', 'swiper/modules'],
-          mui: ['@mui/material', '@mui/icons-material']
+        manualChunks(id) {
+          if (id.includes('swiper')) {
+            return 'swiper';
+          }
+          if (id.includes('@mui')) {
+            return 'mui';
+          }
         }
       }
     }

@@ -52,9 +52,9 @@ const Footer = () => {
                     <div className="flex flex-col gap-8 ">
                         <h2 className="text-xl ">معلومات التواصل</h2>
                         <div className="flex flex-col gap-6">
-                            <a className="flex items-center"><img src={tel} className="ml-2 w-4" alt="tel" />+966 0500012454</a>
-                            <a className="flex items-center"><img src={email} className="ml-2 w-4" alt="tel" />info@araf.com</a>
-                            <a className="flex items-center"><img src={location} className="ml-2 w-4" alt="tel" />الرياض، المملكة العربية السعودية</a>
+<img src={tel} className="ml-2 w-4" alt="phone" loading="lazy" />+966 0500012454
+<img src={email} className="ml-2 w-4" alt="email" loading="lazy" />info@araf.com
+<img src={location} className="ml-2 w-4" alt="location" loading="lazy" />الرياض، المملكة العربية السعودية
                         </div>
                     </div>
 

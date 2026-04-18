@@ -4,7 +4,7 @@ import BlogsCards from "../../components/Blogs/BlogsCards"
 import Footer from "../../components/Footer/Footer"
 // Imports Hooks
 import useFetch from "@/Hooks/useFetch/useFetch";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 
 // Material Ui
 import Pagination from '@mui/material/Pagination';
@@ -28,6 +28,11 @@ const Blogs = () => {
         setPage(value);
     }, []);
 
+    const handleFilter = useCallback((filter) => {
+        setActiveFilter(filter);
+        setPage(1);
+    }, []);
+
     const itemsPerPage = 9;
 
     const themeConfig = createTheme({
@@ -48,13 +53,6 @@ const Blogs = () => {
     const filteredFeatures = expectedLabel
         ? (blogs?.features?.filter(card => card.label === expectedLabel) || [])
         : blogs?.features || [];
-
-    useEffect(() => {
-        async function resetPage() {
-            await setPage(1);
-        }
-        resetPage();
-    }, [activeFilter]);
 
     const paginatedFeatures = filteredFeatures.slice(
         (page - 1) * itemsPerPage,
@@ -82,28 +80,28 @@ const Blogs = () => {
                     {/* Filters Btns */}
                     <div className="flex gap-6 mb-20">
                         <button
-                            onClick={() => setActiveFilter("all")}
+                            onClick={() => handleFilter("all")}
                             className={`px-4 py-3 border text-[18px]  border-borderLightGray text-gray rounded-lg hover:border-gray cursor-pointer transition-all ${activeFilter === "all" ? "bg-primry text-white" : ""}`}
                         >
                             الكل
                         </button>
 
                         <button
-                            onClick={() => setActiveFilter("tech")}
+                            onClick={() => handleFilter("tech")}
                             className={`px-4 py-3 border text-[18px]  border-borderLightGray text-gray rounded-lg hover:border-gray cursor-pointer transition-all ${activeFilter === "tech" ? "bg-primry text-white" : ""}`}
                         >
                             مقالات تقنية
                         </button>
 
                         <button
-                            onClick={() => setActiveFilter("company")}
+                            onClick={() => handleFilter("company")}
                             className={`px-4 py-3 border text-[18px]  border-borderLightGray text-gray rounded-lg hover:border-gray cursor-pointer transition-all ${activeFilter === "company" ? "bg-primry text-white" : ""}`}
                         >
                             اخبار الشركة
                         </button>
 
                         <button
-                            onClick={() => setActiveFilter("updates")}
+                            onClick={() => handleFilter("updates")}
                             className={`hidden md:flex px-4 py-3 border text-[18px]  border-borderLightGray text-gray rounded-lg hover:border-gray cursor-pointer transition-all ${activeFilter === "updates" ? "bg-primry text-white" : ""}`}
                         >
                             أخر المستجدات
@@ -121,14 +119,19 @@ const Blogs = () => {
                     <Stack spacing={1}>
                         <ThemeProvider theme={themeConfig}>
 
-                            <Pagination
-                                page={page}
-                                onChange={handleChange}
-                                count={13}
-                                size="large"
-                                color="primary"
-                                siblingCount={isMobile ? 0 : 1}
-                            />
+                            {(() => {
+                                const totalPages = Math.ceil(filteredFeatures.length / itemsPerPage);
+                                return (
+                                    <Pagination
+                                        page={page}
+                                        onChange={handleChange}
+                                        count={totalPages}
+                                        size="large"
+                                        color="primary"
+                                        siblingCount={isMobile ? 0 : 1}
+                                    />
+                                );
+                            })()}
 
                         </ThemeProvider>
                     </Stack>

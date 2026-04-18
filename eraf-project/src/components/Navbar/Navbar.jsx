@@ -19,7 +19,7 @@ const Navbar = () => {
             <div className='flex justify-between items-center gap-3'>
                 <div>
                     <Link to="/">
-                        <img src={logo} width={"119px"} height={"60px"} alt='إراف' />
+<img src={logo} width={"119px"} height={"60px"} alt='إراف' loading="lazy" />
                     </Link>
                 </div>
 
@@ -37,7 +37,7 @@ const Navbar = () => {
 
             <div className='flex justify-between items-center gap-4 md:gap-10'>
                 <button className='flex justify-between items-center gap-2'>
-                    <img src={LanguageIcon} className='md:ml-1' />
+<img src={LanguageIcon} className='md:ml-1' loading="lazy" />
                     <span className='hidden md:inline'>العربية</span>
                 </button>
                 <Link to="/تواصل-معانا">
@@ -47,7 +47,7 @@ const Navbar = () => {
                 </Link>
 
                 <button className='md:hidden' onClick={toggleMenu}>
-                    <img src={MenuIcon} loading="lazy" />
+<img src={MenuIcon} loading="lazy" alt="menu" />
                 </button>
             </div>
 

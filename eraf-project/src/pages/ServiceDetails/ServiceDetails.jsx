@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import { useRef } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import RelatedServices from "../../components/RelatedServices/RelatedServices";
 import Footer from "../../components/Footer/Footer";
@@ -40,8 +39,6 @@ const ServiceDetails = () => {
     const { id } = useParams();
     const service = mockServices.find(s => s.id === id) || mockServices[0];
 
-    const textRef = useRef(null);
-
 
 
     return (
@@ -71,7 +68,6 @@ const ServiceDetails = () => {
                     <div className="px-4 py-6 relative">
 
                         <p
-                            ref={textRef}
                             className="text-justify gap-8 leading-relaxed"
                         >
                             {service.description}
