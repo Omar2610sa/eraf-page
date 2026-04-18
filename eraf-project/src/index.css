@@ -44,6 +44,8 @@ body {
   --color-text: rgba(75, 75, 75, 1);
   --color-contactForm: rgba(245, 245, 245, 1);
   --color-outline: rgba(1, 122, 155, 1);
+  --color-textGray: rgba(122, 122, 122, 1);
+    --color-BlogsBgColor:  rgba(250, 250, 250, 1);
   /* Color End */
   /* Shadow Start */
   --shadow-primary: 0 5px 5px rgba(0, 0, 0, 0.1)

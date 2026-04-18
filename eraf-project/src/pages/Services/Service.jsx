@@ -32,6 +32,14 @@ const Service = () => {
         setPage(value);
     }, []);
 
+    const itemsPerPage = 6;
+
+    const paginatedServices = {
+        ...services,
+        features: services?.features?.slice((page - 1) * itemsPerPage, page * itemsPerPage) || []
+    };
+
+    const totalPages = Math.ceil((services?.features?.length || 0) / itemsPerPage);
 
     return (
         <div>
@@ -51,7 +59,7 @@ const Service = () => {
                 </div>
 
                 {/* Cards */}
-                <ServicesCards services={services} page={page} />
+                <ServicesCards services={paginatedServices} page={page} />
 
                 {/* Pagination */}
                 <div className="flex justify-center items-center mt-20" dir="ltr">
@@ -61,7 +69,7 @@ const Service = () => {
                             <Pagination
                                 page={page}
                                 onChange={handleChange}
-                                count={13}
+                                count={totalPages}
                                 size="large"
                                 color="primary"
                                 siblingCount={isMobile ? 0 : 1}

@@ -2,15 +2,9 @@
 import Navbar from "../../components/Navbar/Navbar"
 import BlogsCards from "../../components/Blogs/BlogsCards"
 import Footer from "../../components/Footer/Footer"
-
-// Material Ui 
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
-
 // Imports Hooks
 import useFetch from "@/Hooks/useFetch/useFetch";
-import { useState, useCallback } from "react";
-
+import { useState, useCallback, useEffect } from "react";
 
 // Material Ui
 import Pagination from '@mui/material/Pagination';
@@ -20,19 +14,21 @@ import { ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme, createTheme } from "@mui/material/styles";
 
-
-
 const Blogs = () => {
-    const { data: blogs, } = useFetch("/api/client/blogs");
+    const { data: blogs } = useFetch("/api/client/blogs");
 
     const [page, setPage] = useState(1);
+    const [activeFilter, setActiveFilter] = useState("all");
 
+    // Pagination theme and responsiveness
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
     const handleChange = useCallback((event, value) => {
         setPage(value);
     }, []);
+
+    const itemsPerPage = 9;
 
     const themeConfig = createTheme({
         palette: {
@@ -42,10 +38,39 @@ const Blogs = () => {
         },
     });
 
+    const labelMap = {
+        tech: "مقالات تقنية",
+        company: "اخبار الشركة",
+        updates: "أخر المستجدات"
+    };
+
+    const expectedLabel = labelMap[activeFilter];
+    const filteredFeatures = expectedLabel
+        ? (blogs?.features?.filter(card => card.label === expectedLabel) || [])
+        : blogs?.features || [];
+
+    useEffect(() => {
+        async function resetPage() {
+            await setPage(1);
+        }
+        resetPage();
+    }, [activeFilter]);
+
+    const paginatedFeatures = filteredFeatures.slice(
+        (page - 1) * itemsPerPage,
+        page * itemsPerPage
+    );
+
+    const filteredBlogs = {
+        ...blogs,
+        features: paginatedFeatures
+    };
+
+
     return (
-        <div>
+        <div className="bg-BlogsBgColor">
             <Navbar />
-            <section className='container'>
+            <section className='container '>
                 {/* Title Start */}
                 <div className="flex flex-col justify-center items-center gap-10">
 
@@ -54,44 +79,40 @@ const Blogs = () => {
                         <h2 className="text-primry text-[32px] md:text-[48px]">{blogs?.data?.title}</h2>
                         <p className='text-[20px]'>{blogs?.data?.description}</p>
                     </div>
-                    <div>
-                        <ToggleButtonGroup
-                            className="flex gap-6"
-                            exclusive
+                    {/* Filters Btns */}
+                    <div className="flex gap-6 mb-20">
+                        <button
+                            onClick={() => setActiveFilter("all")}
+                            className={`px-4 py-3 border text-[18px]  border-borderLightGray text-gray rounded-lg hover:border-gray cursor-pointer transition-all ${activeFilter === "all" ? "bg-primry text-white" : ""}`}
                         >
-                            <ToggleButton
-                                value="all"
-                                className="!px-4 !py-1 !border !text-[18px] font-semibold !border-[#E6E6E6] !text-[#7A7A7A] !rounded-lg data-[selected=true]:!bg-[#014755] data-[selected=true]:!text-white"
-                            >
-                                الكل
-                            </ToggleButton>
+                            الكل
+                        </button>
 
-                            <ToggleButton
-                                value="tech"
-                                className="!px-4 !py-1 !border !text-[18px] font-semibold !border-[#E6E6E6] !text-[#7A7A7A] !rounded-lg data-[selected=true]:!bg-[#014755] data-[selected=true]:!text-white"
-                            >
-                                مقالات تقنية
-                            </ToggleButton>
+                        <button
+                            onClick={() => setActiveFilter("tech")}
+                            className={`px-4 py-3 border text-[18px]  border-borderLightGray text-gray rounded-lg hover:border-gray cursor-pointer transition-all ${activeFilter === "tech" ? "bg-primry text-white" : ""}`}
+                        >
+                            مقالات تقنية
+                        </button>
 
-                            <ToggleButton
-                                value="company"
-                                className="!px-4 !py-1 !border !text-[18px] font-semibold !border-[#E6E6E6] !text-[#7A7A7A] !rounded-lg data-[selected=true]:!bg-[#014755] data-[selected=true]:!text-white"
-                            >
-                                اخبار الشركة
-                            </ToggleButton>
+                        <button
+                            onClick={() => setActiveFilter("company")}
+                            className={`px-4 py-3 border text-[18px]  border-borderLightGray text-gray rounded-lg hover:border-gray cursor-pointer transition-all ${activeFilter === "company" ? "bg-primry text-white" : ""}`}
+                        >
+                            اخبار الشركة
+                        </button>
 
-                            <ToggleButton
-                                value="updates"
-                                className="!px-4 !py-1 !border !text-[18px] font-semibold !border-[#E6E6E6] !text-[#7A7A7A] !rounded-lg data-[selected=true]:!bg-[#014755] data-[selected=true]:!text-white"
-                            >
-                                أخر المستجدات
-                            </ToggleButton>
-                        </ToggleButtonGroup>
+                        <button
+                            onClick={() => setActiveFilter("updates")}
+                            className={`hidden md:flex px-4 py-3 border text-[18px]  border-borderLightGray text-gray rounded-lg hover:border-gray cursor-pointer transition-all ${activeFilter === "updates" ? "bg-primry text-white" : ""}`}
+                        >
+                            أخر المستجدات
+                        </button>
                     </div>
                 </div>
                 {/* Title End */}
                 {/* Content Start */}
-                <BlogsCards blogs={blogs} />
+                <BlogsCards blogs={filteredBlogs} />
                 {/* Content End */}
                 {/* Toggle Btns */}
 
