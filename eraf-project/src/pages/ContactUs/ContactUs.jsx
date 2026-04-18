@@ -20,8 +20,8 @@ const ContactUs = () => {
 
     const { data: contact,  } = useFetch("/api/client/contact-us");
 
-    return (
-        <div>
+return (
+        <main>
             
             <Navbar />
             <section className='container'>
@@ -58,8 +58,9 @@ const ContactUs = () => {
             </section>
             <ContactForm />
             <Footer />
-        </div>
+        </main>
     );
 };
+
 
 export default ContactUs;

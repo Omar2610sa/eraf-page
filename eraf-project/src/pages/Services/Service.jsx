@@ -41,8 +41,8 @@ const Service = () => {
 
     const totalPages = Math.ceil((services?.features?.length || 0) / itemsPerPage);
 
-    return (
-        <div>
+return (
+        <main>
             <Navbar />
 
             <section className="container">
@@ -82,8 +82,9 @@ const Service = () => {
             </section>
 
             <Footer />
-        </div>
+        </main>
     );
 };
+
 
 export default memo(Service);

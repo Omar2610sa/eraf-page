@@ -19,10 +19,12 @@ const Loading = lazy(() => import("../components/Loading/Loading"));
 
 // Routs Hook
 import { Routes, Route } from "react-router-dom";
+import SEO from "../components/SEO/SEO.jsx";
 
 const AppRoutes = () => {
     return (
         <>
+            <SEO />
             <ScrollTop />
             <Suspense fallback={<Loading />}>
                 <Routes>

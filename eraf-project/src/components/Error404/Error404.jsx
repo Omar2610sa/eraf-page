@@ -8,13 +8,13 @@ import { Link } from "react-router-dom";
 
 const Error404 = () => {
     return (
-        <div>
+        <main>
 
             <Navbar />
             <section className="container">
-                <div className='flex flex-col justify-center items-center gap-12 text-center '>
+                <div className='flex flex-col justify-center items-center gap-12 text-center '> 
                     <div>
-                        <img src={ErrorIcon} className="w-[300px] h-[150px] object-contain md:w-[480px] md:h-[200px]" />
+                        <img src={ErrorIcon} className="w-[300px] h-[150px] object-contain md:w-[480px] md:h-[200px]" alt="شعار خطأ 404" loading="lazy" />
                     </div>
                     <h2 className='text-2xl md:text-4xl'>عذرًا، الصفحة غير موجودة</h2>
                     <p className='  text-[17px] '>يبدو أن الرابط الذي تحاول الوصول إليه غير صحيح أو أن الصفحة قد تم نقلها أو حذفها.لا تقلق، يمكنك العودة إلى الصفحة الرئيسية ومتابعة تصفح خدماتنا بكل سهولة.</p>
@@ -28,7 +28,7 @@ const Error404 = () => {
 
             <Footer />
 
-        </div>
+        </main>
     )
 }
 
