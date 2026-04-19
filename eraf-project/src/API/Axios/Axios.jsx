@@ -2,15 +2,15 @@ import axios from "axios";
 
 const api = axios.create({
     baseURL: "https://api-araf.vue.aait-d.com/",
-    
-    headers: {
-        "Accept-Language": "ar"
-    }
 });
 
+const getLanguage = () => localStorage.getItem('lang') || 'ar';
 
 api.interceptors.request.use(
-    (request) => request,
+    (request) => {
+        request.headers['Accept-Language'] = getLanguage();
+        return request;
+    },
     (error) => {
         return Promise.reject(error);
     }
@@ -39,3 +39,4 @@ api.interceptors.response.use(
 );
 
 export default api;
+

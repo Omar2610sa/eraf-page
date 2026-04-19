@@ -1,8 +1,11 @@
 import { useState, useCallback, memo } from "react";
+import { useLanguage } from "../../contexts/LanguageContext.jsx";
+import { getLocalizedText } from "../../utils/localization.js";
 import Navbar from "../../components/Navbar/Navbar";
 import ServicesCards from "../../components/Services/ServicesCards";
 import Footer from "../../components/Footer/Footer";
-import useFetch from "@/Hooks/useFetch/useFetch";
+import Loading from "../../components/Loading/Loading";
+import useFetch from "../../Hooks/useFetch/useFetch";
 
 // MUI
 import Pagination from "@mui/material/Pagination";
@@ -21,7 +24,9 @@ const themeConfig = createTheme({
 });
 
 const Service = () => {
-    const { data: services } = useFetch("/api/client/services");
+    const { data: services, loading } = useFetch("/api/client/services");
+
+    const { lang } = useLanguage();
 
     const [page, setPage] = useState(1);
 
@@ -41,6 +46,14 @@ const Service = () => {
 
     const totalPages = Math.ceil((services?.features?.length || 0) / itemsPerPage);
 
+    const label = getLocalizedText(services?.data, 'label', lang);
+    const title = getLocalizedText(services?.data, 'title', lang);
+    const description = getLocalizedText(services?.data, 'description', lang);
+
+    const dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+    if (loading) return <Loading />;
+
 return (
         <main>
             <Navbar />
@@ -49,12 +62,12 @@ return (
 
                 {/* Title */}
                 <div className="flex flex-col justify-center items-center text-center gap-4">
-                    <p className="text-title">{services?.data?.label}</p>
+                    <p className="text-title">{label}</p>
                     <h2 className="text-primry text-[32px] md:text-[48px]">
-                        {services?.data?.title}
+                        {title}
                     </h2>
                     <p className="text-[20px]">
-                        {services?.data?.description}
+                        {description}
                     </p>
                 </div>
 
@@ -62,7 +75,7 @@ return (
                 <ServicesCards services={paginatedServices} page={page} />
 
                 {/* Pagination */}
-                <div className="flex justify-center items-center mt-20" dir="ltr">
+                <div className="flex justify-center items-center mt-20" dir={dir}>
                     <Stack spacing={1}>
                         <ThemeProvider theme={themeConfig}>
 
@@ -88,3 +101,4 @@ return (
 
 
 export default memo(Service);
+

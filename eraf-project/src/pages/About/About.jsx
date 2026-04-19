@@ -1,6 +1,3 @@
-
-
-
 // Imports components
 import Navbar from "../../components/Navbar/Navbar"
 import AboutUs from "../../components/AboutUs/AboutUs"
@@ -9,17 +6,20 @@ import Services from "../../components/Services/Services"
 import Brands from "../../components/Brands/Brands"
 import Vision from "../../components/Vision/Vision"
 import Error404 from "../../components/Error404/Error404"
+import Loading from "../../components/Loading/Loading"
 
 import Footer from "../../components/Footer/Footer"
 import Care from '../../components/Care/Care'
 
 // Import Hooks
-import useFetch from "@/Hooks/useFetch/useFetch";
+import useFetch from "../../Hooks/useFetch/useFetch";
 
 const About = () => {
-        const { data: about, error } = useFetch("/api/client/about");
+        const { data: about, error, loading } = useFetch("/api/client/about");
     
         if (error) return <Error404 /> ;
+        if (loading) return <Loading />;
+
     return (
         <div>
             <Navbar />
@@ -36,3 +36,4 @@ const About = () => {
 }
 
 export default About
+

@@ -11,13 +11,16 @@ import logoos from "../../assets/images/logooos.png"
 
 
 import { memo } from 'react';
-// Route Link
+//
 import { Link } from "react-router-dom";
-
+import { useLanguage } from "../../contexts/LanguageContext.jsx";
+import { texts } from "../../utils/localization.js";
 
 const Footer = () => {
+    const { lang } = useLanguage();
+
     return (
-        <footer className="bg-footer text-white relative overflow-hidden" >
+        <footer className="bg-footer text-white relative overflow-hidden" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
             {/* background pattern */}
             <div
                 className="absolute inset-0 pointer-events-none opacity-10 bg-repeat-y md:bg-repeat-x bg-[length:390px] md:bg-[300px]"
@@ -36,38 +39,36 @@ const Footer = () => {
                         <Link to="/">
                             <img src={logo} alt="logo" />
                         </Link>
-                        <p className="text-sm leading-relaxed ">نقدّم خدمات رعاية صحية منزلية موثوقة باحترافية وجودة عالية، لنمنح مرضانا رعاية متكاملة داخل منازلهم بكل راحة وأمان.</p>
+                        <p className="text-sm leading-relaxed ">{texts[lang].companyDescription || 'نقدّم خدمات رعاية صحية منزلية موثوقة باحترافية وجودة عالية، لنمنح مرضانا رعاية متكاملة داخل منازلهم بكل راحة وأمان.'}</p>
                     </div>
 
                     {/* 2 - Site Map */}
                     <div className="flex flex-col gap-8">
-                        <h2 className="text-xl ">خريطة الموقع</h2>
+                        <h2 className="text-xl ">{texts[lang].siteMap || 'خريطة الموقع'}</h2>
                         <div className="flex justify-start items-start gap-10">
                             <div className="flex flex-col gap-6">
-                                <Link to="/" className=" cursor-pointer">الرئيسية</Link>
-                                <Link to="/من-نحن" className=" cursor-pointer ">من نحن</Link>
-                                <Link to="/الخدمات" className="cursor-pointer  ">خدماتنا</Link>
-                                <Link to="/الإدارات" className="cursor-pointer  ">الإدارات</Link>
+                                <Link to="/" className=" cursor-pointer">{texts[lang].home}</Link>
+                                <Link to="/من-نحن" className=" cursor-pointer ">{texts[lang].about}</Link>
+                                <Link to="/الخدمات" className="cursor-pointer  ">{texts[lang].services}</Link>
+                                <Link to="/الإدارات" className="cursor-pointer  ">{texts[lang].departments}</Link>
                             </div>
                             <div className="flex flex-col gap-6">
-                                <Link to="/المدونة" className="cursor-pointer ">المدونة</Link>
-                                <Link to="/إنضم-إلينا" className=" cursor-pointer">أنضم الينا</Link>
-                                <Link to="/تواصل-معانا" className="cursor-pointer ">تواصل معنا</Link>
+                                <Link to="/المدونة" className="cursor-pointer ">{texts[lang].blog}</Link>
+                                <Link to="/إنضم-إلينا" className=" cursor-pointer">{texts[lang].join}</Link>
+                                <Link to="/تواصل-معانا" className="cursor-pointer ">{texts[lang].contact}</Link>
                             </div>
                         </div>
                     </div>
 
                     {/* 3 - Contact Info */}
                     <div className="flex flex-col gap-8 ">
-                        <h2 className="text-xl ">معلومات التواصل</h2>
+                        <h2 className="text-xl ">{texts[lang].contactInfo || 'معلومات التواصل'}</h2>
                         <div className="flex flex-col gap-6">
                             <div className="flex">
                                 <img src={tel} className="ml-2 w-6 h-6" alt="phone" loading="lazy" />
                                 +966 0500012454
-
                             </div>
                             <div className="flex">
-
                                 <img src={email} className="ml-2 w-6 h-6" alt="email" loading="lazy" />info@araf.com
                             </div>
                             <div className="flex">
@@ -78,7 +79,7 @@ const Footer = () => {
 
                     {/* 4 - Social Media */}
                     <div className="flex flex-col gap-8">
-                        <h2 className="text-xl ">تابعنا علي</h2>
+                        <h2 className="text-xl ">{texts[lang].followUs || 'تابعنا علي'}</h2>
                         <div className="flex justify-between items-center gap-5">
                             {/* Icons */}
                             <img className="w-7 h-7" src={facebook} alt="facebook" />
@@ -95,10 +96,10 @@ const Footer = () => {
 
                 {/* Bottom Footer */}
                 <div className="flex flex-col-reverse md:flex-row justify-between gap-5 md:items-start ">
-                    <p>جميع الحقوق محفوظة © شركة أراف للخدمات الصحية المنزلية 2026</p>
+                    <p>{texts[lang].copyright || 'جميع الحقوق محفوظة © شركة أراف للخدمات الصحية المنزلية 2026'}</p>
                     <div className="flex gap-8">
-                        <Link to="/سياسة-الخصوصية" className="cursor-pointer">سياسة الخصوصية</Link>
-                        <Link to="/الشروط-والأحكام" className="cursor-pointer">شروط الاستخدام</Link>
+                        <Link to="/سياسة-الخصوصية" className="cursor-pointer">{texts[lang].privacy || 'سياسة الخصوصية'}</Link>
+                        <Link to="/الشروط-والأحكام" className="cursor-pointer">{texts[lang].terms || 'شروط الاستخدام'}</Link>
                     </div>
                 </div>
 
@@ -108,3 +109,4 @@ const Footer = () => {
 }
 
 export default memo(Footer)
+

@@ -1,4 +1,6 @@
 import { useState, useCallback } from 'react'
+import { useLanguage } from '../../contexts/LanguageContext.jsx';
+import { texts } from '../../utils/localization.js';
 import logo from '../../assets/images/eraf-Logo.png'
 import LanguageIcon from '../../assets/images/icons/Language.png';
 import MenuIcon from '../../assets/images/icons/menu.png';
@@ -8,46 +10,51 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const { lang, toggleLang } = useLanguage();
 
     const toggleMenu = useCallback(() => {
         setIsMenuOpen(prev => !prev);
     }, []);
 
+    const navDir = lang === 'ar' ? 'rtl' : 'ltr';
+
+    const languageText = lang === 'ar' ? texts.en.english : texts.ar.arabic;
+
     return (
-        <div className={'z-50 w-full bg-white sticky top-0 left-0 right-0 flex justify-between items-center px-8 py-4 shadow-primary '} dir='rtl'>
+        <div className={'z-50 w-full bg-white sticky top-0 left-0 right-0 flex justify-between items-center px-8 py-4 shadow-primary '} dir={navDir}>
 
             <div className='flex justify-between items-center gap-3'>
                 <div>
                     <Link to="/">
-<img src={logo} width={"119px"} height={"60px"} alt='إراف' loading="lazy" />
+                        <img src={logo} width={"119px"} height={"60px"} alt='إراف' loading="lazy" />
                     </Link>
                 </div>
 
                 <nav className='hidden md:block'>
-                    <ul className='navBarList flex'>
-                        <li><Link to="/">الرئيسية</Link></li>
-                        <li><Link to="/من-نحن">من نحن</Link></li>
-                        <li><Link to="/الخدمات">الخدمات</Link></li>
-                        <li><Link to="/الإدارات">الإدارات</Link></li>
-                        <li><Link to="/المدونة">المدونة</Link></li>
-                        <li><Link to="/إنضم-إلينا">إنضم إلينا</Link></li>
+                    <ul className={`navBarList flex `}>
+                        <li><Link to="/">{texts[lang].home}</Link></li>
+                        <li><Link to="/من-نحن">{texts[lang].about}</Link></li>
+                        <li><Link to="/الخدمات">{texts[lang].services}</Link></li>
+                        <li><Link to="/الإدارات">{texts[lang].departments}</Link></li>
+                        <li><Link to="/المدونة">{texts[lang].blog}</Link></li>
+                        <li><Link to="/إنضم-إلينا">{texts[lang].join}</Link></li>
                     </ul>
                 </nav>
             </div>
 
             <div className='flex justify-between items-center gap-4 md:gap-10'>
-                <button className='flex justify-between items-center gap-2'>
+                <button className='flex items-center gap-2 cursor-pointer' onClick={toggleLang}>
                     <img src={LanguageIcon} className='w-6 h-6 md:ml-1 object-contain' width={24} height={24} loading="lazy" alt="language" />
-                    <span className='hidden md:inline'>العربية</span>
+                    <span className='hidden md:inline'>{languageText}</span>
                 </button>
                 <Link to="/تواصل-معانا">
                     <button className='primary-btn hidden lg:block'>
-                        تواصل معانا
+                        {texts[lang].contact}
                     </button>
                 </Link>
 
                 <button className='md:hidden' onClick={toggleMenu}>
-<img src={MenuIcon} className="w-6 h-6 object-contain" width={24} height={24} loading="lazy" alt="menu" />
+                    <img src={MenuIcon} className="w-6 h-6 object-contain" width={24} height={24} loading="lazy" alt="menu" />
                 </button>
             </div>
 
@@ -69,7 +76,7 @@ const Navbar = () => {
                     transform: isMenuOpen ? 'translateX(0)' : 'translateX(100%)',
                     transition: 'transform 0.35s ease',
                 }}
-                dir='rtl'
+                dir={navDir}
             >
                 {/* Header - Gradient */}
                 <div
@@ -90,15 +97,15 @@ const Navbar = () => {
                     </button>
                 </div>
 
-                {/* القائمة */}
-                <div className='w-full flex flex-col items-end px-4 mt-10 font-semibold text-lg'>
-                    <Link to="/" onClick={toggleMenu} className='p-6 w-full text-right border-b border-gray-200' >الرئيسية</Link>
-                    <Link to="/من-نحن" onClick={toggleMenu} className='p-6 w-full text-right border-b border-gray-200' >من نحن</Link>
-                    <Link to="/الخدمات" onClick={toggleMenu} className='p-6 w-full text-right border-b border-gray-200' >الخدمات</Link>
-                    <Link to="/الإدارات" onClick={toggleMenu} className='p-6 w-full text-right border-b border-gray-200' >الإدارات</Link>
-                    <Link to="/المدونة" onClick={toggleMenu} className='p-6 w-full text-right border-b border-gray-200' >المدونة</Link>
-                    <Link to="/إنضم-إلينا" onClick={toggleMenu} className='p-6 w-full text-right border-b border-gray-200' >إنضم إلينا</Link>
-                    <Link to="/تواصل-معانا" onClick={toggleMenu} className='p-6 w-full text-right' >تواصل معانا</Link>
+                {/* Menu */}
+                <div className={`w-full flex flex-col ${navDir === 'rtl' ? 'items-end' : 'items-start'} px-4 mt-10 font-semibold text-lg`}>
+                    <Link to="/" onClick={toggleMenu} className={`p-6 w-full ${navDir === 'rtl' ? 'text-right border-b border-gray-200' : 'text-left border-b border-gray-200'}`} >{texts[lang].home}</Link>
+                    <Link to="/من-نحن" onClick={toggleMenu} className={`p-6 w-full ${navDir === 'rtl' ? 'text-right border-b border-gray-200' : 'text-left border-b border-gray-200'}`} >{texts[lang].about}</Link>
+                    <Link to="/الخدمات" onClick={toggleMenu} className={`p-6 w-full ${navDir === 'rtl' ? 'text-right border-b border-gray-200' : 'text-left border-b border-gray-200'}`} >{texts[lang].services}</Link>
+                    <Link to="/الإدارات" onClick={toggleMenu} className={`p-6 w-full ${navDir === 'rtl' ? 'text-right border-b border-gray-200' : 'text-left border-b border-gray-200'}`} >{texts[lang].departments}</Link>
+                    <Link to="/المدونة" onClick={toggleMenu} className={`p-6 w-full ${navDir === 'rtl' ? 'text-right border-b border-gray-200' : 'text-left border-b border-gray-200'}`} >{texts[lang].blog}</Link>
+                    <Link to="/إنضم-إلينا" onClick={toggleMenu} className={`p-6 w-full ${navDir === 'rtl' ? 'text-right border-b border-gray-200' : 'text-left border-b border-gray-200'}`} >{texts[lang].join}</Link>
+                    <Link to="/تواصل-معانا" onClick={toggleMenu} className={`p-6 w-full ${navDir === 'rtl' ? 'text-right' : 'text-left'}`} >{texts[lang].contact}</Link>
                 </div>
             </div>
         </div>
@@ -106,3 +113,4 @@ const Navbar = () => {
 }
 
 export default Navbar
+

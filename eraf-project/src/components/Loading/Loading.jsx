@@ -8,7 +8,6 @@ const Loading = () => {
     <div className="w-full h-screen flex justify-center items-center">
         <OrbitProgress dense color="rgba(1, 71, 85, 1)" size="large" text="تحميل" textColor="" />
     </div>
-    <Footer />
     </>
   )
 }

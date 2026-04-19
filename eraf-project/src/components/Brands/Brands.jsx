@@ -1,3 +1,5 @@
+import { useLanguage } from "../../contexts/LanguageContext.jsx";
+import { getLocalizedText } from "../../utils/localization.js";
 import BrandBox from "./BrandBox";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
@@ -5,15 +7,18 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
 const Brands = ({ brands }) => {
+    const { lang } = useLanguage();
+    const title = getLocalizedText(brands, 'title', lang);
+    const description = getLocalizedText(brands, 'description', lang);
     return (
         <section className="container bg-white">
 
             <div className="flex flex-col justify-center items-center text-center gap-4">
-                <p className="text-title">{brands?.title}</p>
+                <p className="text-title">{title}</p>
                 <h2 className="text-primry text-[32px] md:text-[48px]">
-                    {brands?.title}
+                    {title}
                 </h2>
-                <p className="text-text">{brands?.description}</p>
+                <p className="text-text">{description}</p>
             </div>
 
             <div className="mt-30">
@@ -45,3 +50,4 @@ const Brands = ({ brands }) => {
 };
 
 export default Brands;
+

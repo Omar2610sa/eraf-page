@@ -1,7 +1,10 @@
 import { memo, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../contexts/LanguageContext.jsx";
+import { getLocalizedText, texts } from "../../utils/localization.js";
 
 const Hero = ({ hero }) => {
+    const { lang } = useLanguage();
     const videoRef = useRef(null);
 
     useEffect(() => {
@@ -30,6 +33,9 @@ const Hero = ({ hero }) => {
         return () => observer.disconnect();
     }, [hero?.media?.media_url]);
 
+    const title = getLocalizedText(hero, 'title', lang);
+    const description = getLocalizedText(hero, 'description', lang);
+
     return (
         <div className="relative z-40 w-full md:h-[calc(100vh-92px)] h-[calc(80vh-92px)] overflow-hidden">
 
@@ -48,19 +54,19 @@ const Hero = ({ hero }) => {
                 <div className="flex flex-col items-center justify-center gap-10 md:gap-10 px-6 max-w-[379px] md:max-w-[600px]">
 
                     <h1 className="font-bold text-[40px] md:text-[56px] leading-[1.4]">
-                        {hero?.title}
+                        {title}
                     </h1>
 
                     <p className="text-[16px] leading-relaxed">
-                        {hero?.description}
+                        {description}
                     </p>
 
                     <div className="flex gap-6 md:gap-4">
                         <Link to="/الخدمات">
-                            <button className="primary-btn">استكشف خدماتنا</button>
+                            <button className="primary-btn">{texts[lang].exploreServices}</button>
                         </Link>
                         <Link to="/تواصل-معانا">
-                            <button className="secondary-btn">تواصل معنا</button>
+                            <button className="secondary-btn">{texts[lang].contactUs}</button>
                         </Link>
                     </div>
 
@@ -72,3 +78,4 @@ const Hero = ({ hero }) => {
 };
 
 export default memo(Hero);
+
