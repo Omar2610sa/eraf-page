@@ -27,7 +27,7 @@ export const texts = {
     companyDescription: 'نقدّم خدمات رعاية صحية منزلية موثوقة باحترافية وجودة عالية، لنمنح مرضانا رعاية متكاملة داخل منازلهم بكل راحة وأمان.',
     whyJoinTOUs: 'هل تريد الانضمام لفريقنا؟',
     whyJoinTOUsDescription: 'نبحث دائماً عن المواهب المتميزة للانضمام إلى فريقنا',
-    // New keys
+    // Form keys
     together: 'معًا',
     whyJoinUs: 'لماذا تنضم إلينا؟',
     joinUsDescription: 'انضم لفريقنا في الرعاية الصحية المنزلية وكن جزءًا من بيئة عمل ملهمة، تضمن لك التطور المهني، الدعم المستمر، وفرص حقيقية للنمو.',
@@ -56,7 +56,16 @@ export const texts = {
     requestReceived: 'لقد تلقينا طلبك',
     messageReceived: 'لقد تلقينا رسالتك',
     teamWillContact: 'فريقنا سوف يتواصل معك قريباً',
-    riyadhAddress: 'الرياض، المملكة العربية السعودية'
+    riyadhAddress: 'الرياض، المملكة العربية السعودية',
+    // Care component keys
+    reliableCare: 'رعاية موثوقة',
+    safeServices: 'خدمات صحية منزلية آمنة وموثوقة لجميع عملائنا.',
+    qualitySafety: 'جودة وأمان أولويتنا',
+    highStandards: 'نلتزم بأعلى معايير الجودة والسلامة في كل خدمة.',
+    constantCommunication: 'تواصل دائم وسريع',
+    quickResponse: 'استجابة فعالة وسريعة لجميع احتياجات المرضى وعائلاتهم.',
+    continuousDevelopment: 'تطوير مستمر',
+    latestTech: 'نحرص على تطوير خدماتنا باستمرار باستخدام أحدث التقنيات الطبية'
   },
   en: {
     home: 'Home',
@@ -81,7 +90,7 @@ export const texts = {
     companyDescription: 'We provide reliable home healthcare services with professionalism and high quality, to give our patients comprehensive care inside their homes with comfort and safety.',
     whyJoinTOUs: 'Do you want to join our team?',
     whyJoinTOUsDescription: 'We are always looking for outstanding talent to join our team',
-    // New keys
+    // Form keys
     together: 'Together',
     whyJoinUs: 'Why Join Us?',
     joinUsDescription: 'Join our home healthcare team and be part of an inspiring work environment that ensures your professional development, continuous support, and real growth opportunities.',
@@ -110,7 +119,16 @@ export const texts = {
     requestReceived: 'We received your request',
     messageReceived: 'We received your message',
     teamWillContact: 'Our team will contact you soon',
-    riyadhAddress: 'Riyadh, Kingdom of Saudi Arabia'
+    riyadhAddress: 'Riyadh, Kingdom of Saudi Arabia',
+    // Care component keys
+    reliableCare: 'Reliable Care',
+    safeServices: 'Safe and reliable home healthcare services for all our clients.',
+    qualitySafety: 'Quality and Safety are Our Priority',
+    highStandards: 'We adhere to the highest standards of quality and safety in every service.',
+    constantCommunication: 'Constant and Fast Communication',
+    quickResponse: 'Effective and quick response to all patients and their families needs.',
+    continuousDevelopment: 'Continuous Development',
+    latestTech: 'We continuously develop our services using the latest medical technologies'
   }
 };
 

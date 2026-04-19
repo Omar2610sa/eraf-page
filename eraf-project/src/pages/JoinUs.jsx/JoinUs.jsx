@@ -18,7 +18,7 @@ const JoinUs = () => {
             <Navbar />
             <section className="container">
                 {/* Title Start */}
-                <div className={`flex flex-col justify-center items-center text-center gap-4 ${lang === 'ar' ? 'text-right' : 'text-left'}`}>
+                <div className={`flex flex-col justify-center items-center text-center gap-4 `}>
                     <p className="text-title">{texts[lang].together}</p>
                     <h2 className="text-primry text-[32px] md:text-[48px]">{texts[lang].whyJoinUs}</h2>
                     <p className='text-[20px]'>
