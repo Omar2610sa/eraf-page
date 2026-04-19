@@ -21,7 +21,7 @@ const Brands = ({ brands }) => {
                     loop={true}
                     speed={600}
                     autoplay={{
-                        delay: 1500,
+                        delay: 800,
                         disableOnInteraction: false,
                     }}
                     slidesPerView={4}

@@ -2,11 +2,16 @@ import { Link } from "react-router-dom";
 
 import checkIcon from "../../assets/images/icons/Icon Container check (4).png";
 
+// Hooks imports
+import useFetch from "@/Hooks/useFetch/useFetch";
 
 // Material UI
 import NorthWestIcon from "@mui/icons-material/NorthWest";
 
 const AboutUs = ({ about }) => {
+
+    const { data: AboutData } = useFetch("/api/client/features/11");
+
     return (
         <section className="bg-bgWhite">
             <div className="container flex flex-col md:flex-row justify-between items-center gap-[97px]">
@@ -48,10 +53,11 @@ const AboutUs = ({ about }) => {
                         {/* Content */}
                         <div className="flex flex-col items-center">
                             <span className="text-primr text-[14px] font-semibold">
-                                +5
+                                {AboutData?.title}
                             </span>
                             <p className="text-[12px] text-gray">
-                                سنوات خبرة
+                                {AboutData?.description}
+
                             </p>
                         </div>
 

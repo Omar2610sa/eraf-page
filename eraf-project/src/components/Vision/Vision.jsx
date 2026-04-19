@@ -3,8 +3,13 @@ import frameImage from '../../assets/images/vision/image.png'
 import eyeFrame from "../../assets/images/vision/Eye Scan.png"
 import targetIcon from "../../assets/images/vision/Frame.png"
 
+// Hooks imports
+import useFetch from "@/Hooks/useFetch/useFetch";
 
 const Vision = ({vision}) => {
+    const { data: visionData } = useFetch("/api/client/features/12");
+
+    console.log()
     return (
         <section className='container'>
             {/* Title Start */}
@@ -28,8 +33,8 @@ const Vision = ({vision}) => {
                             </div>
                             {/* Content */}
                             <div className='flex flex-col justify-center items-start gap-2'>
-                                <h3 className='font-bold text-gray-900 md:text-2xl'>رؤيتنا</h3>
-                                <p className="text-[10px] md:text-[16px]">أن نكون الرائدين في الرعاية الصحية المنزلية مع ضمان رضا المرضى.</p>
+                                <h3 className='font-bold text-gray-900 md:text-2xl'>{visionData?.title}</h3>
+                                <p className="text-[10px] md:text-[16px]">{visionData?.description}</p>
                             </div>
                         </div>
                     </div>
@@ -44,8 +49,8 @@ const Vision = ({vision}) => {
                             </div>
                             {/* Content */}
                             <div className='flex flex-col justify-center items-start gap-2'>
-                                <h3 className='font-bold text-gray-900 md:text-2xl'>رسالتنا</h3>
-                                <p className="text-[10px] md:text-[16px]">تقديم رعاية احترافية تجمع بين الخبرة والاهتمام الشخصي لكل مريض.</p>
+                                <h3 className='font-bold text-gray-900 md:text-2xl'>{visionData?.related?.[0].title}</h3>
+                                <p className="text-[10px] md:text-[16px]">{visionData?.related?.[0].description}</p>
                             </div>
                         </div>
                     </div>
