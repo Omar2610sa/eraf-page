@@ -53,11 +53,26 @@ body {
     /* Shadow End */
 }
 
-.container {
+/* .container {
   margin: auto;
-  padding: 48px 12px;
-}
+  padding: 48px 16px;
+} */
 
+@utility container {
+    margin-inline: auto;
+    padding:48px 16px;
+    max-width: 100%;
+    @media (min-width: 992px) {
+      max-width: 962px;
+    }
+    @media (min-width: 1200px) {
+      max-width: 1200px;
+      padding-inline:0;
+  }
+    @media (min-width: 1400px) {
+      max-width: 1400px;
+    }
+  }
 
 /* Roots End */
 

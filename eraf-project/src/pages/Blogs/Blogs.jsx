@@ -115,7 +115,7 @@ const Blogs = () => {
                 {/* Toggle Btns */}
 
                 {/* Toggles btns */}
-                <div className="flex justify-center items-center mt-20" dir="ltr">
+                <div className="flex justify-center items-center mt-20" >
                     <Stack spacing={1}>
                         <ThemeProvider theme={themeConfig}>
 

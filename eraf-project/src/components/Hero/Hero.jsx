@@ -37,7 +37,7 @@ const Hero = ({ hero }) => {
     const description = getLocalizedText(hero, 'description', lang);
 
     return (
-        <div className="relative z-40 w-full md:h-[calc(100vh-92px)] h-[calc(80vh-92px)] overflow-hidden">
+        <div className="relative z-40 w-full md:h-[calc(100vh-92px)] h-[calc(90vh-92px)] overflow-hidden">
 
             <video
                 ref={videoRef}

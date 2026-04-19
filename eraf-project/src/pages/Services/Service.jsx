@@ -50,7 +50,6 @@ const Service = () => {
     const title = getLocalizedText(services?.data, 'title', lang);
     const description = getLocalizedText(services?.data, 'description', lang);
 
-    const dir = lang === 'ar' ? 'rtl' : 'ltr';
 
     if (loading) return <Loading />;
 
@@ -75,7 +74,7 @@ return (
                 <ServicesCards services={paginatedServices} page={page} />
 
                 {/* Pagination */}
-                <div className="flex justify-center items-center mt-20" dir={dir}>
+                <div className="flex justify-center items-center mt-20" >
                     <Stack spacing={1}>
                         <ThemeProvider theme={themeConfig}>
 

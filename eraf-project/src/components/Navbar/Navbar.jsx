@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { useLanguage } from '../../contexts/LanguageContext.jsx';
 import { texts } from '../../utils/localization.js';
 import logo from '../../assets/images/eraf-Logo.png'
@@ -20,10 +20,16 @@ const Navbar = () => {
 
     const languageText = lang === 'ar' ? texts.en.english : texts.ar.arabic;
 
-    return (
-        <div className={'z-50 w-full bg-white sticky top-0 left-0 right-0 flex justify-between items-center px-8 py-4 shadow-primary '} dir={navDir}>
+    useEffect(() => {
+        document.documentElement.dir = navDir;
+    }, [navDir]);
 
-            <div className='flex justify-between items-center gap-3'>
+    return (
+       <div className='bg-white shadow-primary sticky top-0 left-0 right-0 z-50 '>
+
+         <div className={'w-full  container  flex justify-between items-center py-4  '}>
+
+            <div className='flex justify-between items-center  gap-3'>
                 <div>
                     <Link to="/">
                         <img src={logo} width={"119px"} height={"60px"} alt='إراف' loading="lazy" />
@@ -76,7 +82,7 @@ const Navbar = () => {
                     transform: isMenuOpen ? 'translateX(0)' : 'translateX(100%)',
                     transition: 'transform 0.35s ease',
                 }}
-                dir={navDir}
+        
             >
                 {/* Header - Gradient */}
                 <div
@@ -109,6 +115,7 @@ const Navbar = () => {
                 </div>
             </div>
         </div>
+       </div>
     )
 }
 

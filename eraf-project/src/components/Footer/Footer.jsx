@@ -20,8 +20,9 @@ const Footer = () => {
     const { lang } = useLanguage();
 
     return (
-        <footer className="bg-footer text-white relative overflow-hidden" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
-            {/* background pattern */}
+        <footer className="bg-footer text-white ">
+           <div className='container relative overflow-hidden'>
+             {/* background pattern */}
             <div
                 className="absolute inset-0 pointer-events-none opacity-10 bg-repeat-y md:bg-repeat-x bg-[length:390px] md:bg-[300px]"
                 style={{
@@ -104,6 +105,7 @@ const Footer = () => {
                 </div>
 
             </div>
+           </div>
         </footer>
     )
 }
