@@ -2,6 +2,8 @@
 import Navbar from "../../components/Navbar/Navbar"
 import BlogsCards from "../../components/Blogs/BlogsCards"
 import Footer from "../../components/Footer/Footer"
+import Loading from "../../components/Loading/Loading"
+
 // Imports Hooks
 import useFetch from "@/Hooks/useFetch/useFetch";
 import { useState, useCallback } from "react";
@@ -15,7 +17,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme, createTheme } from "@mui/material/styles";
 
 const Blogs = () => {
-    const { data: blogs } = useFetch("/api/client/blogs");
+    const { data: blogs, loading } = useFetch("/api/client/blogs");
 
     const [page, setPage] = useState(1);
     const [activeFilter, setActiveFilter] = useState("all");
@@ -63,6 +65,7 @@ const Blogs = () => {
         ...blogs,
         features: paginatedFeatures
     };
+        if (loading) return <Loading />;
 
 
     return (

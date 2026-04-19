@@ -2,7 +2,7 @@ import Navbar from "../../components/Navbar/Navbar"
 import Card from "./Card"
 import CallUs from "../../components/CallUs/CallUs"
 import Footer from "../../components/Footer/Footer"
-
+import Loading from "../../components/Loading/Loading"
 // Test Image
 import img from "../../assets/borads/Image (3_2).png"
 // Import Hooks
@@ -58,9 +58,10 @@ const Departments = () => {
         },
     ]
 
-    const { data: boards, error } = useFetch("/api/client/boards");
+    const { data: boards, error, loading } = useFetch("/api/client/boards");
 
     if (error) return <Error404 />;
+        if (loading) return <Loading />;
 
     return (
         <div>
