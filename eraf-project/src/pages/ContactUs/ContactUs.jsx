@@ -29,6 +29,8 @@ const ContactUs = () => {
     const title = getLocalizedText(data, 'title', lang);
     const description = getLocalizedText(data, 'description', lang);
 
+    const textDir = lang === 'ar' ? 'flex-row-reverse' : 'flex-row';
+
     return (
         <main>
             <Navbar />
@@ -46,18 +48,18 @@ const ContactUs = () => {
                         <h3 className="text-[26px]">{texts[lang].contactInfo}</h3>
 
                         <div className="flex flex-col items-start gap-6">
-                            <p className="flex flex-row-reverse items-center">
+                            <p className={`flex ${textDir} items-center`}>
                                 info@araf.com
                                 <img className="w-6 h-6 ml-6" src={mail} />
                             </p>
 
-                            <p className="flex flex-row-reverse items-center">
+                            <p className={`flex ${textDir} items-center`}>
                                 +966 0500012454
                                 <img className="w-6 h-6 ml-6" src={tel} />
                             </p>
 
-                            <p className="flex flex-row-reverse items-center">
-                                الرياض، المملكة العربية السعودية
+                            <p className={`flex ${textDir} items-center`}>
+                                {texts[lang].riyadhAddress}
                                 <img className="w-6 h-6 ml-6" src={loc} />
                             </p>
                         </div>
@@ -84,3 +86,4 @@ const ContactUs = () => {
 };
 
 export default ContactUs;
+

@@ -9,10 +9,12 @@ import saudi from "../../assets/images/Saudia.png";
 import cloud from "../../assets/images/icons/cloud icon.png";
 
 import { showSuccessAlert } from "../../components/Alerts/Alrets";
-
+import { useLanguage } from "../../contexts/LanguageContext";
+import { texts } from "../../utils/localization";
 
 const JoinUsForm = () => {
     const navigate = useNavigate();
+    const { lang } = useLanguage();
 
     const [formData, setFormData] = useState({
         name: "",
@@ -25,7 +27,7 @@ const JoinUsForm = () => {
 
     const country = {
         name: "Saudi Arabia",
-        code: "966+",
+        code: texts[lang].saudiCode,
     };
 
     const handleInputChange = (e) => {
@@ -48,33 +50,34 @@ const JoinUsForm = () => {
             attachments: e.target.files,
         }));
     };
+    
     const validate = () => {
         const newErrors = {};
 
-        if (!formData.name.trim()) newErrors.name = "املأ الاسم";
+        if (!formData.name.trim()) newErrors.name = texts[lang].fillName;
 
         if (!formData.phone.trim()) {
-            newErrors.phone = "املأ الهاتف";
-        } else if (!/^\d+$/.test(formData.phone)) {
-            newErrors.phone = "أدخل أرقام فقط";
+            newErrors.phone = texts[lang].fillPhone;
+        } else if (!/^\d+$/.test(formData.phone.trim())) {
+            newErrors.phone = texts[lang].numbersOnly;
         } else if (formData.phone.trim().length !== 9) {
-            newErrors.phone = "يجب أن يكون الرقم 9 أرقام بالضبط";
+            newErrors.phone = texts[lang].phoneNineDigits;
         }
 
-        if (!formData.message.trim()) newErrors.message = "املأ الوظيفة";
+        if (!formData.message.trim()) newErrors.message = texts[lang].fillJob;
 
         setErrors(newErrors);
 
         return Object.keys(newErrors).length === 0;
     };
+    
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if (validate()) {
-
             showSuccessAlert(
-                "لقد تلقينا طلبك",
-                "فريقنا سوف يتواصل معك قريباً",
+                texts[lang].requestReceived,
+                texts[lang].teamWillContact,
                 () => navigate("/")
             );
 
@@ -86,30 +89,28 @@ const JoinUsForm = () => {
             });
         }
     };
+    
+    const textDir = lang === 'ar' ? 'text-right' : 'text-left';
+    
     return (
         <section className="container">
-
-
-
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
                 {/* FORM */}
                 <div className="bg-contactForm rounded-3xl shadow-lg p-8">
 
-                    <h3 className="text-2xl font-bold text-right mb-8">
-                        قدم الآن
+                    <h3 className={`text-2xl font-bold ${textDir} mb-8`}>
+                        {texts[lang].applyNow}
                     </h3>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
 
-
-
                         {/* PHONE */}
-                        <div className="text-right">
-                            <label className="block mb-2">الهاتف</label>
+                        <div className={textDir}>
+                            <label className="block mb-2">{texts[lang].phoneLabel}</label>
 
                             <div className="relative">
-                                <div className="absolute left-3 top-1/2 -translate-y-1/2 border-r-1 py-3 pr-2 border-gray-300 flex flex-row-reverse items-center gap-2">
+                                <div className="absolute left-3 top-1/2 -translate-y-1/2 border-r-1 py-1 pr-2 border-gray-300 flex flex-row-reverse items-center gap-2">
                                     <img src={saudi} className="w-5 h-5" alt="saudi" />
                                     <span>{country.code}</span>
                                 </div>
@@ -118,9 +119,9 @@ const JoinUsForm = () => {
                                     type="tel"
                                     value={formData.phone}
                                     onChange={handleInputChange}
-                                    className={`w-full pl-20 pr-4 py-3 border rounded-lg text-right
+                                    className={`w-full pl-20 pr-4 py-3 border rounded-lg ${textDir}
                                                       ${errors.phone ? "border-red-500" : "border-gray-300"}`}
-                                    placeholder="أدخل رقم الهاتف"
+                                    placeholder={texts[lang].phonePlaceholder}
                                 />
                             </div>
 
@@ -130,17 +131,18 @@ const JoinUsForm = () => {
                                 </p>
                             )}
                         </div>
+                        
                         {/* NAME */}
-                        <div className="text-right">
-                            <label className="block mb-2">الاسم</label>
+                        <div className={textDir}>
+                            <label className="block mb-2">{texts[lang].nameLabel}</label>
 
                             <input
                                 name="name"
                                 value={formData.name}
                                 onChange={handleInputChange}
-                                className={`w-full px-4 py-3 border rounded-lg text-right
+                                className={`w-full px-4 py-3 border rounded-lg ${textDir}
                                                   ${errors.name ? "border-red-500" : "border-gray-300"}`}
-                                placeholder="أدخل اسمك"
+                                placeholder={texts[lang].namePlaceholder}
                             />
 
                             {errors.name && (
@@ -149,17 +151,18 @@ const JoinUsForm = () => {
                                 </p>
                             )}
                         </div>
+                        
                         {/* MESSAGE */}
-                        <div className="text-right">
-                            <label className="block mb-2">الوظيفة</label>
+                        <div className={textDir}>
+                            <label className="block mb-2">{texts[lang].jobTitleLabel}</label>
 
                             <input
                                 name="message"
                                 value={formData.message}
                                 onChange={handleInputChange}
-                                className={`w-full px-4 py-3 border rounded-lg resize-none text-right
+                                className={`w-full px-4 py-3 border rounded-lg resize-none ${textDir}
                                                 ${errors.message ? "border-red-500" : "border-gray-300"}`}
-                                placeholder="ادخل نوع الوظيفة"
+                                placeholder={texts[lang].jobPlaceholder}
                             />
 
                             {errors.message && (
@@ -168,20 +171,21 @@ const JoinUsForm = () => {
                                 </p>
                             )}
                         </div>
+                        
                         {/* File */}
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                            رفع السيرة الذاتية (PDF)
+                        <label className={`block text-sm font-medium text-gray-700 mb-2 ${textDir}`}>
+                            {texts[lang].uploadCvPdf}
                         </label>
 
                         <label className="flex items-center justify-center gap-2 px-4 py-8 md:py-20 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-teal-500 hover:bg-teal-50 transition">
 
-                            <div className="flex flex-col justify-center items-center gap-2">
+                            <div className={`flex flex-col justify-center items-center gap-2 ${textDir}`}>
                                 <img src={cloud} className="w-5 h-5" alt="" />
                                 <span className="text-sm text-gray-600">
-                                    اضغط لرفع ملفات
+                                    {texts[lang].clickToUpload}
                                 </span>
                                 <p className="text-xs text-gray-500">
-                                    بإمكانك ارفاق عدة ملفات
+                                    {texts[lang].multipleFiles}
                                 </p>
                             </div>
 
@@ -193,13 +197,12 @@ const JoinUsForm = () => {
                             />
                         </label>
 
-
                         {/* SUBMIT */}
                         <button
                             type="submit"
                             className="w-full bg-primry text-white py-3 rounded-full hover:bg-white cursor-pointer hover:text-primry duration-300"
                         >
-                            إرسال
+                            {texts[lang].submit}
                         </button>
 
                     </form>
@@ -216,3 +219,4 @@ const JoinUsForm = () => {
 }
 
 export default JoinUsForm
+
