@@ -65,7 +65,11 @@ export const texts = {
     constantCommunication: 'تواصل دائم وسريع',
     quickResponse: 'استجابة فعالة وسريعة لجميع احتياجات المرضى وعائلاتهم.',
     continuousDevelopment: 'تطوير مستمر',
-    latestTech: 'نحرص على تطوير خدماتنا باستمرار باستخدام أحدث التقنيات الطبية'
+    latestTech: 'نحرص على تطوير خدماتنا باستمرار باستخدام أحدث التقنيات الطبية',
+    fillterAll: 'الكل',
+    fillterTech: 'مقالات تقنية',
+    fillterCompany: 'اخبار الشركة',
+    fillterUpdates: 'أخر المستجدات'
   },
   en: {
     home: 'Home',
@@ -128,7 +132,11 @@ export const texts = {
     constantCommunication: 'Constant and Fast Communication',
     quickResponse: 'Effective and quick response to all patients and their families needs.',
     continuousDevelopment: 'Continuous Development',
-    latestTech: 'We continuously develop our services using the latest medical technologies'
+    latestTech: 'We continuously develop our services using the latest medical technologies',
+    fillterAll: 'All',
+    fillterTech: 'Technical articles',
+    fillterCompany: 'Company News',
+    fillterUpdates: 'Latest Updates'
   }
 };
 

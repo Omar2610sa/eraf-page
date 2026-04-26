@@ -67,7 +67,6 @@ body {
     }
     @media (min-width: 1200px) {
       max-width: 1200px;
-      padding-inline:0;
   }
     @media (min-width: 1400px) {
       max-width: 1400px;

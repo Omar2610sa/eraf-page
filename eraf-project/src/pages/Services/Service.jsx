@@ -50,7 +50,7 @@ const Service = () => {
     const title = getLocalizedText(services?.data, 'title', lang);
     const description = getLocalizedText(services?.data, 'description', lang);
 
-
+    console.log(services);
     if (loading) return <Loading />;
 
 return (

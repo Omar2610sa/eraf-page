@@ -16,7 +16,14 @@ import { ThemeProvider } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme, createTheme } from "@mui/material/styles";
 
+
+import { useLanguage } from "../../contexts/LanguageContext.jsx";
+import { getLocalizedText, texts } from "../../utils/localization.js";
+
+
 const Blogs = () => {
+    const { lang } = useLanguage();
+
     const { data: blogs, loading } = useFetch("/api/client/blogs");
 
     const [page, setPage] = useState(1);
@@ -46,11 +53,12 @@ const Blogs = () => {
     });
 
     const labelMap = {
-        tech: "مقالات تقنية",
-        company: "اخبار الشركة",
-        updates: "أخر المستجدات"
+        tech: texts[lang].fillterTech,
+        company: texts[lang].fillterCompany,
+        updates: texts[lang].fillterUpdates
     };
 
+   
     const expectedLabel = labelMap[activeFilter];
     const filteredFeatures = expectedLabel
         ? (blogs?.features?.filter(card => card.label === expectedLabel) || [])
@@ -86,28 +94,28 @@ const Blogs = () => {
                             onClick={() => handleFilter("all")}
                             className={`px-4 py-3 border text-[18px]  border-borderLightGray text-gray rounded-lg hover:border-gray cursor-pointer transition-all ${activeFilter === "all" ? "bg-primry text-white" : ""}`}
                         >
-                            الكل
+                            {texts[lang].fillterAll}
                         </button>
 
                         <button
                             onClick={() => handleFilter("tech")}
                             className={`px-4 py-3 border text-[18px]  border-borderLightGray text-gray rounded-lg hover:border-gray cursor-pointer transition-all ${activeFilter === "tech" ? "bg-primry text-white" : ""}`}
                         >
-                            مقالات تقنية
+                            {texts[lang].fillterTech}
                         </button>
 
                         <button
                             onClick={() => handleFilter("company")}
                             className={`px-4 py-3 border text-[18px]  border-borderLightGray text-gray rounded-lg hover:border-gray cursor-pointer transition-all ${activeFilter === "company" ? "bg-primry text-white" : ""}`}
                         >
-                            اخبار الشركة
+                            {texts[lang].fillterCompany}
                         </button>
 
                         <button
                             onClick={() => handleFilter("updates")}
                             className={`hidden md:flex px-4 py-3 border text-[18px]  border-borderLightGray text-gray rounded-lg hover:border-gray cursor-pointer transition-all ${activeFilter === "updates" ? "bg-primry text-white" : ""}`}
                         >
-                            أخر المستجدات
+                            {texts[lang].fillterUpdates}
                         </button>
                     </div>
                 </div>

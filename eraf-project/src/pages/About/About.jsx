@@ -24,7 +24,7 @@ const About = () => {
         <div>
             <Navbar />
             <AboutUs about={about?.about} />
-            <Vision vision={about?.partners} />
+            <Vision vision={about?.mission_vision} />
             <Care care={about?.why_choose_us} />
             <Services services={about?.services} />
             <Brands brands={about?.partners} />

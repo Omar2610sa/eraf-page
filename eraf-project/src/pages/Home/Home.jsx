@@ -23,7 +23,7 @@ const Home = () => {
             <Hero hero={home?.hero} />
             <Services services={home?.services} />
             <AboutUs about={home?.about} />
-            <Vision vision={home?.partners} />
+            <Vision vision={home?.mission_vision} />
             <Blogs blogs={home?.blogs} />
             <Brands brands={home?.partners} />
             <CallUs callUs={home?.banner} />
