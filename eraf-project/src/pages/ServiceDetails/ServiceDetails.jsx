@@ -33,13 +33,12 @@ const mockServices = [
 
 const ServiceDetails = () => {
 
+    const { id } = useParams();
     const { data: services } = useFetch("/api/client/services");
 
-    console.log(services?.features)
+    console.log(services)
 
-    const { id } = useParams();
     const service = mockServices.find(s => s.id === id) || mockServices[0];
-
 
 
     return (
@@ -60,7 +59,7 @@ const ServiceDetails = () => {
                     </h2>
 
                     <img
-                        src={services?.data?.media?.media_url}
+                        src={service.media[0]}
                         className="w-full my-10 md:h-[400px] object-cover rounded-2xl"
                         alt=""
                     />

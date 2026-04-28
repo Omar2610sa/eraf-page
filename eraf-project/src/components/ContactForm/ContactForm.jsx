@@ -1,34 +1,37 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Footer/Footer";
-
 import map from "../../assets/images/Map.png";
-import saudi from "../../assets/images/Saudia.png";
 import cloud from "../../assets/images/icons/cloud icon.png";
 
-import { showSuccessAlert } from "../../components/Alerts/Alrets";
+import { showSuccessAlert, showErrorAlert } from "../../components/Alerts/Alrets";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { texts } from "../../utils/localization";
+
+import api from "../../API/Axios/Axios";
+
+// useFetch
+import useFetch from "../../Hooks/useFetch/useFetch";
+
+import Select from "react-select";
 
 const ContactForm = () => {
     const navigate = useNavigate();
     const { lang } = useLanguage();
 
+    const { data: countryData } = useFetch("/api/general/countries");
+
     const [formData, setFormData] = useState({
         name: "",
+        email: "",
         phone: "",
         message: "",
-        attachments: null,
+        country: null,
+        attachment: null,
     });
 
     const [errors, setErrors] = useState({});
-
-    const country = {
-        name: "Saudi Arabia",
-        code: texts[lang].saudiCode,
-    };
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -45,16 +48,37 @@ const ContactForm = () => {
     };
 
     const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file && file.type !== "application/pdf") {
+            setErrors((prev) => ({ ...prev, attachment: texts[lang].pdfOnly }));
+            setFormData((prev) => ({ ...prev, attachment: null }));
+            e.target.value = "";
+            return;
+        }
         setFormData((prev) => ({
             ...prev,
-            attachments: e.target.files,
+            attachment: file,
+        }));
+        setErrors((prev) => ({ ...prev, attachment: "" }));
+    };
+
+    const handleCountryChange = (selectedOption) => {
+        setFormData((prev) => ({
+            ...prev,
+            country: selectedOption,
         }));
     };
-    
+
     const validate = () => {
         const newErrors = {};
 
         if (!formData.name.trim()) newErrors.name = texts[lang].fillName;
+
+        if (!formData.email.trim()) {
+            newErrors.email = texts[lang].fillEmail;
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+            newErrors.email = texts[lang].invalidEmail;
+        }
 
         if (!formData.phone.trim()) {
             newErrors.phone = texts[lang].fillPhone;
@@ -70,11 +94,18 @@ const ContactForm = () => {
 
         return Object.keys(newErrors).length === 0;
     };
-    
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (validate()) {
+        if (!validate()) return;
+
+        setIsSubmitting(true);
+
+        try {
+            const attachmentId = await uploadFile();
+            await submitContact(attachmentId);
+
             showSuccessAlert(
                 texts[lang].messageReceived,
                 texts[lang].teamWillContact,
@@ -83,15 +114,94 @@ const ContactForm = () => {
 
             setFormData({
                 name: "",
+                email: "",
                 phone: "",
                 message: "",
-                attachments: null,
+                country: null,
+                attachment: null,
             });
+        } catch (error) {
+            const message = error?.response?.data?.message || error.message || texts[lang].contactFailed;
+            showErrorAlert(message);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
+    const uploadFile = async () => {
+        if (!formData.attachment) return null;
+
+        const uploadData = new FormData();
+        uploadData.append("file", formData.attachment);
+        uploadData.append("model", "contact");
+
+        try {
+            const response = await api.post("/api/general/attachments", uploadData, {
+                headers: { "Content-Type": "multipart/form-data" },
+            });
+
+            const id = response?.data?.id ?? response?.data?.data?.id;
+            if (!id) throw new Error("Invalid attachment response");
+
+            return id;
+        } catch {
+            throw new Error(texts[lang].uploadFailed);
+        }
+    };
+
+    const submitContact = async (attachmentId) => {
+        const payload = {
+            name: formData.name,
+            email: formData.email,
+            message: formData.message,
+            attachment_id: attachmentId,
+        };
+
+        await api.post("/api/admin/contact", payload);
+    };
+
     const textDir = lang === 'ar' ? 'text-right' : 'text-left';
-    
+
+    const options = countryData
+        ? countryData.map((country) => ({
+            value: country.id,
+            label: (
+                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                    <img src={country.flag} width="20" alt={country.name} />
+                    ({country.phone_code})
+                </div>
+            )
+        }))
+        : [];
+
+    const customSelectStyles = {
+        control: (base) => ({
+            ...base,
+            backgroundColor: "rgb(245, 245, 245)",
+            cursor: "pointer",
+            border: "none",
+            outline: 'none'
+        }),
+
+        dropdownIndicator: (base) => ({
+            ...base,
+            color: "rgb(107, 114, 128)",
+        }),
+        clearIndicator: (base) => ({
+            ...base,
+        }),
+        menuList: (base) => ({
+            ...base,
+        }),
+        option: (base, state) => ({
+            ...base,
+            backgroundColor: state.isSelected ? "rgb(20, 184, 166)" : state.isFocused ? "rgb(240, 253, 250)" : "white",
+            color: state.isSelected ? "white" : "black",
+            cursor: "pointer",
+            fontSize: "14px",
+        }),
+    };
+
     return (
         <section className="container">
 
@@ -126,22 +236,54 @@ const ContactForm = () => {
                             )}
                         </div>
 
+                        {/* EMAIL */}
+                        <div className={textDir}>
+                            <label className="block mb-2">{texts[lang].emailLabel}</label>
+
+                            <input
+                                name="email"
+                                type="email"
+                                value={formData.email}
+                                onChange={handleInputChange}
+                                className={`w-full px-4 py-3 border rounded-lg ${textDir}
+                                            ${errors.email ? "border-red-500" : "border-gray-300"}`}
+                                placeholder={texts[lang].emailPlaceholder}
+                            />
+
+                            {errors.email && (
+                                <p className="text-red-500 text-xs mt-1">
+                                    {errors.email}
+                                </p>
+                            )}
+                        </div>
+
                         {/* PHONE */}
                         <div className={textDir}>
                             <label className="block mb-2">{texts[lang].phoneLabel}</label>
 
-                            <div className="relative">
-                                <div className="absolute left-3 top-1/2 -translate-y-1/2 border-r-1 py-3 pr-1 border-gray-300 flex flex-row-reverse items-center gap-2">
-                                    <img src={saudi} className="w-5 h-5" alt="saudi" />
-                                    <span>{country.code}</span>
+                            <div className="relative bg-[rgb(245, 245, 245)]">
+                                <div className="absolute  left-0  top-0 h-full flex items-center border-r border-gray-300 rounded-l-lg">
+                                    <Select
+                                        options={options}
+                                        value={formData.country}
+                                        onChange={handleCountryChange}
+                                        placeholder={texts[lang].selectCountry}
+                                        isSearchable={false}
+                                        isClearable={false}
+                                        styles={customSelectStyles}
+                                        components={{
+                                            IndicatorSeparator: () => null,
+                                        }}
+                                        className="w-36 "
+                                    />
                                 </div>
                                 <input
                                     name="phone"
                                     type="tel"
                                     value={formData.phone}
                                     onChange={handleInputChange}
-                                    className={`w-full pl-20 pr-4 py-3 border rounded-lg ${textDir}
-                                                ${errors.phone ? "border-red-500" : "border-gray-300"}`}
+                                    className={`w-full pl-32 pr-4 py-3 border rounded-lg ${textDir}
+                                                      ${errors.phone ? "border-red-500" : "border-gray-300"}`}
                                     placeholder={texts[lang].phonePlaceholder}
                                 />
                             </div>
@@ -173,7 +315,7 @@ const ContactForm = () => {
                                 </p>
                             )}
                         </div>
-                        
+
                         {/* File */}
                         <label className={`block text-sm font-medium text-gray-700 mb-2 ${textDir}`}>
                             {texts[lang].uploadFilesOptional}
@@ -193,32 +335,35 @@ const ContactForm = () => {
 
                             <input
                                 type="file"
-                                multiple
+                                accept=".pdf"
                                 onChange={handleFileChange}
                                 className="hidden"
                             />
                         </label>
 
+                        {errors.attachment && (
+                            <p className={`text-red-500 text-xs mt-1 ${textDir}`}>
+                                {errors.attachment}
+                            </p>
+                        )}
+
                         {/* SUBMIT */}
                         <button
                             type="submit"
-                            className="w-full bg-primry text-white py-3 rounded-full hover:bg-white cursor-pointer hover:text-primry duration-300"
+                            disabled={isSubmitting}
+                            className="w-full bg-primry text-white py-3 rounded-full hover:bg-white cursor-pointer hover:text-primry duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            {texts[lang].submit}
+                            {isSubmitting ? texts[lang].sending : texts[lang].submit}
                         </button>
 
                     </form>
                 </div>
 
-                {/* MAP */}
-                <div className="rounded-3xl overflow-hidden ">
+
                     <img src={map} className="w-full md:h-full object-cover" alt="map" />
                 </div>
-
-            </div>
         </section>
     );
 };
 
 export default ContactForm;
-
