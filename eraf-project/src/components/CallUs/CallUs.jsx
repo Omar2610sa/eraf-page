@@ -14,7 +14,7 @@ const CallUs = ({ callUs }) => {
     return (
         <section className='bg-gradient-to-r from-[#606769] to-[#299FB6]'>
             {/* Content Start */}
-            <div className='container max-w-4xl'>
+            <div data-aos="fade-up" className='container max-w-4xl'>
                 <div className='flex flex-col justify-center items-center gap-10 text-center '>
 
                     <h2 className='text-[32px] md:text-[56px] text-white'>{callUs?.title || texts[lang].whyJoinTOUs }</h2>

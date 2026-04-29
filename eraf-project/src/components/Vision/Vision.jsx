@@ -19,12 +19,12 @@ const Vision = ({vision}) => {
             </div>
             {/* Title End */}
             {/* Image Content Start */}
-            <div className='relative min-h-[650px] py-8'>
+            <div  className='relative min-h-[650px] py-8'>
                 <img className='absolute inset-0 z-0 w-full h-full object-contain' src={frameImage} alt="" loading="eager" />
 
                 <div className='relative z-10 flex flex-col gap-24 md:gap-28 h-full'>
                     {/* Card 1 Start */}
-                    <div className='flex justify-start animate-slide-up'>
+                    <div data-aos="fade-left" className='flex justify-start animate-slide-up'>
                         <div className='mt-42 md:mt-24 flex w-[220px] md:w-[400px] p-2 gap-2 md:p-6 md:gap-6 items-start bg-white rounded-xl shadow-lg'>
                             {/* Icon */}
                             <div>
@@ -40,7 +40,7 @@ const Vision = ({vision}) => {
                     {/* Card 1 End */}
 
                     {/* Card 2 Start */}
-                    <div className='flex justify-end animate-slide-down'>
+                    <div data-aos="fade-right" className='flex justify-end animate-slide-down'>
                         <div className='flex w-[220px] md:w-[400px] p-2 gap-2 md:p-6 md:gap-6 items-start bg-white rounded-xl shadow-lg'>
                             {/* Icon */}
                             <div>

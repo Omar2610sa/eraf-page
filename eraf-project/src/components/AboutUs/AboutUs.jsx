@@ -25,7 +25,7 @@ const AboutUs = ({ about }) => {
             <div className="container flex flex-col md:flex-row justify-between items-center gap-25">
 
                 {/* Content Start */}
-                <div className="flex flex-col justify-center items-start gap-[40px] mb-10">
+                <div data-aos="fade-left" className="flex flex-col justify-center items-start gap-[40px] mb-10">
                     <div className="flex flex-col justify-center items-start gap-[16px]">
                         <p className="text-title">{label}</p>
                         <h2 className="text-primry text-[48px]">{title}</h2>
@@ -41,13 +41,14 @@ const AboutUs = ({ about }) => {
                 {/* Content End */}
 
                 {/* Image + Label Start */}
-                <div className="relative">
+                <div  className="relative">
 
                     <img
                         src={about?.media?.media_url}
                         width={"1300px"}
                         height={"600px"}
                         alt="About Us"
+                        
                     />
 
                     {/* Label */}
@@ -59,7 +60,7 @@ const AboutUs = ({ about }) => {
                         </div>
 
                         {/* Content */}
-                        <div className="flex flex-col items-center">
+                        <div  className="flex flex-col items-center">
                             <span className="text-primr text-[14px] font-semibold">
                                 {aboutDataTitle}
                             </span>

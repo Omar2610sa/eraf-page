@@ -13,7 +13,7 @@ const Brands = ({ brands }) => {
     return (
         <section className="container bg-white">
 
-            <div className="flex flex-col justify-center items-center text-center gap-4">
+            <div data-aos="fade-down" className="flex flex-col justify-center items-center text-center gap-4">
                 <p className="text-title">{title}</p>
                 <h2 className="text-primry text-[32px] md:text-[48px]">
                     {title}
@@ -21,7 +21,7 @@ const Brands = ({ brands }) => {
                 <p className="text-text">{description}</p>
             </div>
 
-            <div className="mt-30">
+            <div data-aos="zoom-in-up" className="mt-30">
                 <Swiper
                     loop={true}
                     speed={600}

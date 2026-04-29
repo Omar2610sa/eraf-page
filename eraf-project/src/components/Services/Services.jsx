@@ -40,7 +40,7 @@ const Services = ({ services }) => {
             </div>
 
             {/* Content */}
-            <ServicesCards services={services} />
+            <ServicesCards  services={services} />
         </section>
     );
 };
