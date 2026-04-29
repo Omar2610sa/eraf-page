@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import map from "../../assets/images/Map.png";
 import cloud from "../../assets/images/icons/cloud icon.png";
 
-import { showSuccessAlert, showErrorAlert } from "../../components/Alerts/Alrets";
+import { showSuccessAlert } from "../../components/Alerts/Alrets";
 import { useLanguage } from "../../contexts/LanguageContext";
 import { texts } from "../../utils/localization";
 
@@ -28,6 +28,7 @@ const ContactForm = () => {
         message: "",
         country: null,
         attachment: null,
+        attachmentId: null,
     });
 
     const [errors, setErrors] = useState({});
@@ -47,7 +48,7 @@ const ContactForm = () => {
         }));
     };
 
-    const handleFileChange = (e) => {
+    const handleFileChange = async (e) => {
         const file = e.target.files[0];
         if (file && file.type !== "application/pdf") {
             setErrors((prev) => ({ ...prev, attachment: texts[lang].pdfOnly }));
@@ -55,11 +56,46 @@ const ContactForm = () => {
             e.target.value = "";
             return;
         }
-        setFormData((prev) => ({
-            ...prev,
-            attachment: file,
-        }));
-        setErrors((prev) => ({ ...prev, attachment: "" }));
+
+        if (file) {
+            setFormData((prev) => ({
+                ...prev,
+                attachment: file,
+            }));
+            setErrors((prev) => ({ ...prev, attachment: "" }));
+
+            // Upload immediately
+            await uploadFileImmediately(file);
+        }
+    };
+
+    const uploadFileImmediately = async (file) => {
+        const uploadData = new FormData();
+        uploadData.append("file", file);
+        uploadData.append("model", "contact");
+
+        try {
+            const response = await api.post("/api/general/attachments", uploadData, {
+                headers: { "Content-Type": "multipart/form-data" },
+            });
+
+            const id = response?.data?.id ?? response?.data?.data?.id;
+            if (!id) throw new Error("Invalid attachment response");
+
+            setFormData((prev) => ({
+                ...prev,
+                attachment: file,
+                attachmentId: id,
+            }));
+            setErrors((prev) => ({ ...prev, attachment: "" }));
+        } catch (error) {
+            setErrors((prev) => ({
+                ...prev,
+                attachment: error.message || texts[lang].uploadFailed,
+            }));
+            setFormData((prev) => ({ ...prev, attachment: null }));
+            e.target.value = "";
+        }
     };
 
     const handleCountryChange = (selectedOption) => {
@@ -74,20 +110,13 @@ const ContactForm = () => {
 
         if (!formData.name.trim()) newErrors.name = texts[lang].fillName;
 
-        if (!formData.email.trim()) {
-            newErrors.email = texts[lang].fillEmail;
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
-            newErrors.email = texts[lang].invalidEmail;
-        }
+
 
         if (!formData.phone.trim()) {
             newErrors.phone = texts[lang].fillPhone;
         } else if (!/^\d+$/.test(formData.phone.trim())) {
             newErrors.phone = texts[lang].numbersOnly;
-        } else if (formData.phone.trim().length !== 9) {
-            newErrors.phone = texts[lang].phoneNineDigits;
         }
-
         if (!formData.message.trim()) newErrors.message = texts[lang].fillMessage;
 
         setErrors(newErrors);
@@ -95,40 +124,9 @@ const ContactForm = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        if (!validate()) return;
-
-        setIsSubmitting(true);
-
-        try {
-            const attachmentId = await uploadFile();
-            await submitContact(attachmentId);
-
-            showSuccessAlert(
-                texts[lang].messageReceived,
-                texts[lang].teamWillContact,
-                () => navigate("/")
-            );
-
-            setFormData({
-                name: "",
-                email: "",
-                phone: "",
-                message: "",
-                country: null,
-                attachment: null,
-            });
-        } catch (error) {
-            const message = error?.response?.data?.message || error.message || texts[lang].contactFailed;
-            showErrorAlert(message);
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
     const uploadFile = async () => {
+        if (formData.attachmentId) return formData.attachmentId;
+
         if (!formData.attachment) return null;
 
         const uploadData = new FormData();
@@ -152,19 +150,58 @@ const ContactForm = () => {
     const submitContact = async (attachmentId) => {
         const payload = {
             name: formData.name,
-            email: formData.email,
+            phone: formData.phone,
             message: formData.message,
-            attachment_id: attachmentId,
+            phone_code: formData.country?.value || "",
         };
 
-        await api.post("/api/admin/contact", payload);
+        // Only add attachment_id if file was uploaded
+        if (attachmentId) {
+            payload.attachment_id = attachmentId;
+        }
+
+        await api.post("/api/client/contact", payload);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (!validate()) return;
+
+        setIsSubmitting(true);
+
+        try {
+            // File is already uploaded, just get the ID
+            const attachmentId = formData.attachmentId;
+
+            await submitContact(attachmentId);
+
+            showSuccessAlert(
+                texts[lang].messageReceived,
+                texts[lang].teamWillContact,
+                () => navigate("/")
+            );
+
+            setFormData({
+                name: "",
+                phone: "",
+                message: "",
+                country: null,
+                attachment: null,
+                attachmentId: null,
+            });
+        } catch (error) {
+            const message = error?.response?.data?.message || error.message || texts[lang].contactFailed;
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const textDir = lang === 'ar' ? 'text-right' : 'text-left';
 
     const options = countryData
         ? countryData.map((country) => ({
-            value: country.id,
+            value: country.phone_code,
             label: (
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                     <img src={country.flag} width="20" alt={country.name} />
@@ -204,7 +241,6 @@ const ContactForm = () => {
 
     return (
         <section className="container">
-
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
                 {/* FORM */}
@@ -236,33 +272,14 @@ const ContactForm = () => {
                             )}
                         </div>
 
-                        {/* EMAIL */}
-                        <div className={textDir}>
-                            <label className="block mb-2">{texts[lang].emailLabel}</label>
 
-                            <input
-                                name="email"
-                                type="email"
-                                value={formData.email}
-                                onChange={handleInputChange}
-                                className={`w-full px-4 py-3 border rounded-lg ${textDir}
-                                            ${errors.email ? "border-red-500" : "border-gray-300"}`}
-                                placeholder={texts[lang].emailPlaceholder}
-                            />
-
-                            {errors.email && (
-                                <p className="text-red-500 text-xs mt-1">
-                                    {errors.email}
-                                </p>
-                            )}
-                        </div>
 
                         {/* PHONE */}
                         <div className={textDir}>
                             <label className="block mb-2">{texts[lang].phoneLabel}</label>
 
                             <div className="relative bg-[rgb(245, 245, 245)]">
-                                <div className="absolute  left-0  top-0 h-full flex items-center border-r border-gray-300 rounded-l-lg">
+                                <div className="absolute left-0 top-0 h-full flex items-center border-r border-gray-300 rounded-l-lg">
                                     <Select
                                         options={options}
                                         value={formData.country}
@@ -274,7 +291,7 @@ const ContactForm = () => {
                                         components={{
                                             IndicatorSeparator: () => null,
                                         }}
-                                        className="w-36 "
+                                        className="w-36"
                                     />
                                 </div>
                                 <input
@@ -321,25 +338,64 @@ const ContactForm = () => {
                             {texts[lang].uploadFilesOptional}
                         </label>
 
-                        <label className={`flex items-center justify-center gap-2 py-8 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-teal-500 hover:bg-teal-50 transition ${textDir}`}>
-
-                            <div className={`flex flex-col justify-center items-center gap-2 ${textDir}`}>
-                                <img src={cloud} className="w-5 h-5" alt="" />
-                                <span className="text-sm text-gray-600">
-                                    {texts[lang].clickToUpload}
-                                </span>
-                                <p className="text-xs text-gray-500">
-                                    {texts[lang].multipleFiles}
-                                </p>
+                        {formData.attachment ? (
+                            <div className={`bg-teal-50 border-2 border-teal-200 rounded-lg p-4 ${textDir}`}>
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 bg-teal-500 rounded-lg flex items-center justify-center text-white text-xs font-bold">
+                                            PDF
+                                        </div>
+                                        <div>
+                                            <p className="text-sm font-medium text-gray-800">
+                                                {formData.attachment.name}
+                                            </p>
+                                            <p className="text-xs text-gray-500">
+                                                {(formData.attachment.size / 1024).toFixed(2)} KB
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setFormData((prev) => ({
+                                                ...prev,
+                                                attachment: null,
+                                                attachmentId: null,
+                                            }));
+                                            setErrors((prev) => ({ ...prev, attachment: "" }));
+                                        }}
+                                        className="text-red-500 hover:text-red-700 font-medium text-sm"
+                                    >
+                                        ✕ {texts[lang].remove}
+                                    </button>
+                                </div>
+                                {formData.attachmentId && (
+                                    <p className="text-xs text-teal-600 mt-2">
+                                        ✓ {texts[lang].uploaded}
+                                    </p>
+                                )}
                             </div>
+                        ) : (
+                            <label className="flex items-center justify-center gap-2 px-4 py-8 md:py-20 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-teal-500 hover:bg-teal-50 transition">
 
-                            <input
-                                type="file"
-                                accept=".pdf"
-                                onChange={handleFileChange}
-                                className="hidden"
-                            />
-                        </label>
+                                <div className={`flex flex-col justify-center items-center gap-2 ${textDir}`}>
+                                    <img src={cloud} className="w-5 h-5" alt="upload" />
+                                    <span className="text-sm text-gray-600">
+                                        {texts[lang].clickToUpload}
+                                    </span>
+                                    <p className="text-xs text-gray-500">
+                                        {texts[lang].pdfOnly}
+                                    </p>
+                                </div>
+
+                                <input
+                                    type="file"
+                                    accept=".pdf"
+                                    onChange={handleFileChange}
+                                    className="hidden"
+                                />
+                            </label>
+                        )}
 
                         {errors.attachment && (
                             <p className={`text-red-500 text-xs mt-1 ${textDir}`}>
@@ -359,9 +415,12 @@ const ContactForm = () => {
                     </form>
                 </div>
 
-
+                {/* Image */}
+                <div className="rounded-3xl overflow-hidden">
                     <img src={map} className="w-full md:h-full object-cover" alt="map" />
                 </div>
+
+            </div>
         </section>
     );
 };

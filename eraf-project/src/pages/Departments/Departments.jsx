@@ -60,6 +60,7 @@ const Departments = () => {
 
     const { data: boards, error, loading } = useFetch("/api/client/boards");
 
+    console.log(boards);
     if (error) return <Error404 />;
         if (loading) return <Loading />;
 
@@ -78,8 +79,8 @@ const Departments = () => {
                 {/* Cards */}
                 <div className='grid md:grid-cols-3 gap-6 mt-6'>
                 {
-                    intital.map((card, index) => {
-                        return <Card key={index} image={card.image} title={card.title} description={card.description} />;
+                    boards?.features?.map((card, index) => {
+                        return <Card key={index} image={card.media} title={card.title} description={card.description} />;
                     })
                 }
                 </div>

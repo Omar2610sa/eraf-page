@@ -19,19 +19,11 @@ const mockServices = [
     title: "التمريض المنزلي",
     media: serviceImg3
   },
-  {
-    id: "3",
-    title: "العلاج الطبيعي",
-    media: serviceImg4
-  },
 
 ];
 
-const RelatedServices = ({ currentId }) => {
-    // Filter out current if provided, take first 4 for cols-2
-    const relatedServices = mockServices
-        .filter(s => !currentId || s.id !== currentId)
-        .slice(0, 4);
+const RelatedServices = ({ related }) => {
+
 
     return (
         <section className="container">
@@ -54,7 +46,7 @@ const RelatedServices = ({ currentId }) => {
 
             {/* Content */}
             <div className="grid md:grid-cols-2 gap-10 mt-10">
-                {relatedServices.map((service) => (
+                {related?.map((service) => (
                     <Card
                         key={service.id}
                         image={service.media}
