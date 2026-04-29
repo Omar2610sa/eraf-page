@@ -2,13 +2,11 @@
 
 // Materinal UI
 import NorthWestIcon from '@mui/icons-material/NorthWest';
-import calender from "../../assets/images/blogs/calendar-2.png";
-import image from "../../assets/images/blogs/BlogsDetails.png";
-
+import Card from "../../components/Blogs/Blog/Blog";
 import { Link } from "react-router-dom";
 
 
-const RelatedTopics = () => {
+const RelatedTopics = ({related}) => {
     return (
         <section className='container '>
 
@@ -28,101 +26,18 @@ const RelatedTopics = () => {
                 </div>
 
                 {/* Content Start */}
-                <div className='grid md:grid-cols-3 gap-[24px] mt-12'>
-                    <div className='group p-5 bg-white rounded-2xl cursor-pointer'>
-
-                        {/* Image */}
-                        <div className='overflow-hidden rounded-xl'>
-                            <img
-                                className='w-full group-hover:scale-105 transition-transform duration-300'
-                                src={image}
-                                alt=""
-                            />
-                        </div>
-
-                        {/* Content */}
-                        <div className='flex flex-col gap-5 justify-center items-start mt-6 max-w-[326px] md:max-w-[400px]'>
-
-                            <h3 className='text-[22px] group-hover:text-primry transition-colors duration-300'>
-                                دليل الرعاية الصحية المنزلية
-                                لكبار السن
-                            </h3>
-
-                            <p className='text-lightGray text-[12px]'>
-                                تعرف على أهم خطوات رعاية كبار السن في المنزل، وكيفية توفير بيئة آمنة ومريحة تدعم صحتهم اليومية.
-                            </p>
-
-                            <p className="flex items-center text-[14px] text-lightGray">
-                                <img className="w-5 h-5 ml-1" src={calender} alt="calender" loading="lazy" />
-                                غير محدد
-                            </p>
-
-                        </div>
-
-                    </div>
-                    <div className='group p-5 bg-white rounded-2xl cursor-pointer'>
-
-                        {/* Image */}
-                        <div className='overflow-hidden rounded-xl'>
-                            <img
-                                className='w-full group-hover:scale-105 transition-transform duration-300'
-                                src={image}
-                                alt=""
-                            />
-                        </div>
-
-                        {/* Content */}
-                        <div className='flex flex-col gap-5 justify-center items-start mt-6 max-w-[326px] md:max-w-[400px]'>
-
-                            <h3 className='text-[22px] group-hover:text-primry transition-colors duration-300'>
-                                دليل الرعاية الصحية المنزلية
-                                لكبار السن
-                            </h3>
-
-                            <p className='text-lightGray text-[12px]'>
-                                تعرف على أهم خطوات رعاية كبار السن في المنزل، وكيفية توفير بيئة آمنة ومريحة تدعم صحتهم اليومية.
-                            </p>
-
-                            <p className="flex items-center text-[14px] text-lightGray">
-                                <img className="w-5 h-5 ml-1" src={calender} alt="calender" loading="lazy" />
-                                غير محدد
-                            </p>
-
-                        </div>
-
-                    </div>
-                    <div className='group p-5 bg-white rounded-2xl cursor-pointer'>
-
-                        {/* Image */}
-                        <div className='overflow-hidden rounded-xl'>
-                            <img
-                                className='w-full group-hover:scale-105 transition-transform duration-300'
-                                src={image}
-                                alt=""
-                            />
-                        </div>
-
-                        {/* Content */}
-                        <div className='flex flex-col gap-5 justify-center items-start mt-6 max-w-[326px] md:max-w-[400px]'>
-
-                            <h3 className='text-[22px] group-hover:text-primry transition-colors duration-300'>
-                                دليل الرعاية الصحية المنزلية
-                                لكبار السن
-                            </h3>
-
-                            <p className='text-lightGray text-[12px]'>
-                                تعرف على أهم خطوات رعاية كبار السن في المنزل، وكيفية توفير بيئة آمنة ومريحة تدعم صحتهم اليومية.
-                            </p>
-
-                            <p className="flex items-center text-[14px] text-lightGray">
-                                <img className="w-5 h-5 ml-1" src={calender} alt="calender" loading="lazy" />
-                                غير محدد
-                            </p>
-
-                        </div>
-
-                    </div>
-                </div>
+                            {/* Content */}
+            <div className="grid md:grid-cols-3 gap-10 mt-10">
+                {related?.map((blogs) => (
+                    <Card
+                        key={blogs.id}
+                        image={blogs.media}
+                        title={blogs.title}
+                        id={blogs.id}
+                        label={blogs.label}
+                    />
+                ))}
+            </div>
                 {/* Content End */}
             </div>
 

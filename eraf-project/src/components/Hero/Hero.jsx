@@ -50,7 +50,7 @@ const Hero = ({ hero }) => {
 
             <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/50 z-30"></div>
 
-            <div className="relative z-40 h-full flex items-center justify-center text-center text-secondary">
+            <div data-aos="fade-up" className="relative z-40 h-full flex items-center justify-center text-center text-secondary">
                 <div className="flex flex-col items-center justify-center gap-10 md:gap-10 px-6 max-w-[379px] md:max-w-[600px]">
 
                     <h1 className="font-bold text-[40px] md:text-[52px] leading-[1.4]">

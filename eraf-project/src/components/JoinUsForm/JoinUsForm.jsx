@@ -15,6 +15,7 @@ import { texts } from "../../utils/localization";
 import useFetch from "../../Hooks/useFetch/useFetch";
 
 import Select from "react-select";
+import api from "../../API/Axios/Axios";
 
 const JoinUsForm = () => {
     const navigate = useNavigate();
@@ -28,11 +29,13 @@ const JoinUsForm = () => {
         name: "",
         phone: "",
         message: "",
-        attachments: null,
         country: null,
+        attachment: null,
+        attachmentId: null,
     });
 
     const [errors, setErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -55,11 +58,58 @@ const JoinUsForm = () => {
         }));
     };
 
-    const handleFileChange = (e) => {
-        setFormData((prev) => ({
-            ...prev,
-            attachments: e.target.files,
-        }));
+    const handleFileChange = async (e) => {
+        const file = e.target.files[0];
+        if (file && file.type !== "application/pdf") {
+            setErrors((prev) => ({ ...prev, attachment: texts[lang].pdfOnly }));
+            setFormData((prev) => ({ ...prev, attachment: null }));
+            e.target.value = "";
+            return;
+        }
+
+        if (file) {
+            setFormData((prev) => ({
+                ...prev,
+                attachment: file,
+            }));
+            setErrors((prev) => ({ ...prev, attachment: "" }));
+
+            // Upload immediately
+            await uploadFileImmediately(file);
+        }
+    };
+
+    const uploadFileImmediately = async (file) => {
+        const uploadData = new FormData();
+        uploadData.append("file", file);
+        uploadData.append("model", "applications");
+        uploadData.append("attachment_type", "document");
+
+        try {
+            const response = await api.post("/api/general/attachments", uploadData, {
+                headers: { "Content-Type": "multipart/form-data" },
+            });
+
+            const uploadedAttachment = response.data?.data || response.data;
+
+            if (uploadedAttachment) {
+                const id = uploadedAttachment.id || uploadedAttachment;
+
+                setFormData((prev) => ({
+                    ...prev,
+                    attachment: file,
+                    attachmentId: id,
+                }));
+                setErrors((prev) => ({ ...prev, attachment: "" }));
+            }
+        } catch (error) {
+            setErrors((prev) => ({
+                ...prev,
+                attachment: error.message || texts[lang].uploadFailed,
+            }));
+            setFormData((prev) => ({ ...prev, attachment: null }));
+            e.target.value = "";
+        }
     };
 
     const validate = () => {
@@ -71,62 +121,65 @@ const JoinUsForm = () => {
             newErrors.phone = texts[lang].fillPhone;
         } else if (!/^\d+$/.test(formData.phone.trim())) {
             newErrors.phone = texts[lang].numbersOnly;
-        } else if (formData.phone.trim().length !== 9) {
-            newErrors.phone = texts[lang].phoneNineDigits;
         }
-
         if (!formData.message.trim()) newErrors.message = texts[lang].fillJob;
+
+        // File is required
+        if (!formData.attachmentId) newErrors.attachment = texts[lang].uploadRequired;
 
         setErrors(newErrors);
 
         return Object.keys(newErrors).length === 0;
     };
 
+    const submitJoinRequest = async (attachmentId) => {
+        const payload = {
+            name: formData.name,
+            phone: formData.phone,
+            job_type: formData.message,
+            phone_code: formData.country?.value || "",
+        };
+
+        // Attachment is required for join us
+        if (attachmentId) {
+            payload.cv = attachmentId;
+        }
+
+        await api.post("/api/client/applications", payload);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (validate()) {
-            try {
-                const formDataToSend = new FormData();
-                formDataToSend.append("name", formData.name);
-                formDataToSend.append("phone", formData.phone);
-                formDataToSend.append("message", formData.message);
-                formDataToSend.append("phone code", formData.country?.value || "");
+        if (!validate()) return;
 
-                if (formData.attachments) {
-                    for (let i = 0; i < formData.attachments.length; i++) {
-                        formDataToSend.append("attachments", formData.attachments[i]);
-                    }
-                }
+        setIsSubmitting(true);
 
-                const res = await fetch("/api/client/contact", {
-                    method: "POST",
-                    body: formDataToSend,
-                });
+        try {
+            // File is already uploaded, just get the ID
+            const attachmentId = formData.attachmentId;
 
-                if (res.ok) {
-                    showSuccessAlert(
-                        texts[lang].requestReceived,
-                        texts[lang].teamWillContact,
-                        () => navigate("/")
-                    );
+            await submitJoinRequest(attachmentId);
 
-                    // reset form
-                    setFormData({
-                        name: "",
-                        phone: "",
-                        message: "",
-                        attachments: null,
-                        country: null,
-                    });
-                } else {
-                    const errorData = await res.json();
-                    alert(errorData?.message || "Something went wrong");
-                }
-            } catch (err) {
-                console.error(err);
-                alert(err.message || "Something went wrong");
-            }
+            showSuccessAlert(
+                texts[lang].requestReceived,
+                texts[lang].teamWillContact,
+                () => navigate("/")
+            );
+
+            // reset form
+            setFormData({
+                name: "",
+                phone: "",
+                message: "",
+                country: null,
+                attachment: null,
+                attachmentId: null,
+            });
+        } catch (error) {
+            const message = error?.response?.data?.message || error.message || texts[lang].contactFailed;
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -134,7 +187,7 @@ const JoinUsForm = () => {
 
     const options = countryData
         ? countryData.map((country) => ({
-            value: country.id,
+            value: country.phone_code,
             label: (
                 <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                     <img src={country.flag} width="20" alt={country.name} />
@@ -243,7 +296,7 @@ const JoinUsForm = () => {
                             )}
                         </div>
 
-                        {/* MESSAGE */}
+                        {/* job title */}
                         <div className={textDir}>
                             <label className="block mb-2">{texts[lang].jobTitleLabel}</label>
 
@@ -268,32 +321,78 @@ const JoinUsForm = () => {
                             {texts[lang].uploadCvPdf}
                         </label>
 
-                        <label className="flex items-center justify-center gap-2 px-4 py-8 md:py-20 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-teal-500 hover:bg-teal-50 transition">
-
-                            <div className={`flex flex-col justify-center items-center gap-2 ${textDir}`}>
-                                <img src={cloud} className="w-5 h-5" alt="" />
-                                <span className="text-sm text-gray-600">
-                                    {texts[lang].clickToUpload}
-                                </span>
-                                <p className="text-xs text-gray-500">
-                                    {texts[lang].multipleFiles}
-                                </p>
+                        {formData.attachment ? (
+                            <div className={`bg-teal-50 border-2 border-teal-200 rounded-lg p-4 ${textDir}`}>
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 bg-teal-500 rounded-lg flex items-center justify-center text-white text-xs font-bold">
+                                            PDF
+                                        </div>
+                                        <div>
+                                            <p className="text-sm font-medium text-gray-800">
+                                                {formData.attachment.name}
+                                            </p>
+                                            <p className="text-xs text-gray-500">
+                                                {(formData.attachment.size / 1024).toFixed(2)} KB
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setFormData((prev) => ({
+                                                ...prev,
+                                                attachment: null,
+                                                attachmentId: null,
+                                            }));
+                                            setErrors((prev) => ({ ...prev, attachment: "" }));
+                                        }}
+                                        className="text-red-500 hover:text-red-700 font-medium text-sm"
+                                    >
+                                        ✕ {texts[lang].remove}
+                                    </button>
+                                </div>
+                                {formData.attachmentId && (
+                                    <p className="text-xs text-teal-600 mt-2">
+                                        ✓ {texts[lang].uploaded}
+                                    </p>
+                                )}
                             </div>
+                        ) : (
+                            <label className="flex items-center justify-center gap-2 px-4 py-8 md:py-20 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-teal-500 hover:bg-teal-50 transition">
 
-                            <input
-                                type="file"
-                                multiple
-                                onChange={handleFileChange}
-                                className="hidden"
-                            />
-                        </label>
+                                <div className={`flex flex-col justify-center items-center gap-2 ${textDir}`}>
+                                    <img src={cloud} className="w-5 h-5" alt="upload" />
+                                    <span className="text-sm text-gray-600">
+                                        {texts[lang].clickToUpload}
+                                    </span>
+                                    <p className="text-xs text-gray-500">
+                                        {texts[lang].pdfOnly}
+                                    </p>
+                                </div>
+
+                                <input
+                                    type="file"
+                                    accept=".pdf"
+                                    onChange={handleFileChange}
+                                    className="hidden"
+                                />
+                            </label>
+                        )}
+
+                        {errors.attachment && (
+                            <p className={`text-red-500 text-xs mt-1 ${textDir}`}>
+                                {errors.attachment}
+                            </p>
+                        )}
 
                         {/* SUBMIT */}
                         <button
                             type="submit"
-                            className="w-full bg-primry text-white py-3 rounded-full hover:bg-white cursor-pointer hover:text-primry duration-300"
+                            disabled={isSubmitting}
+                            className="w-full bg-primry text-white py-3 rounded-full hover:bg-white cursor-pointer hover:text-primry duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            {texts[lang].submit}
+                            {isSubmitting ? texts[lang].sending : texts[lang].submit}
                         </button>
 
                     </form>

@@ -4,8 +4,8 @@ const Card = ({ image, title, description }) => {
   return (
     <div className='p-4 flex flex-col gap-4'>
       {/* Image */}
-      <div>
-        <img src={image} loading="lazy" alt="" />
+      <div className="">
+        <img className="w-90 h-60 object-cover object-top rounded-xl" src={image} loading="lazy" alt="" />
       </div>
       {/* Contet */}
       <div className='flex flex-col justify-center items-center gap-2'>

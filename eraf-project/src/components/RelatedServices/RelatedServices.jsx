@@ -2,25 +2,8 @@ import NorthWestIcon from '@mui/icons-material/NorthWest';
 import { Link } from "react-router-dom";
 import Card from "../../components/Services/Card/Card";
 
-// Mock service images for Card
-import serviceImg1 from "../../assets/images/services/Image.png";
-import serviceImg3 from "../../assets/images/services/Image (2).png";
-import serviceImg4 from "../../assets/images/services/Image (3).png";
 
-// Mock data - TODO: Replace with useFetch('/api/services') when API ready (features array)
-const mockServices = [
-  {
-    id: "1",
-    title: "الرعاية الصحية المنزلية",
-    media: serviceImg1
-  },
-  {
-    id: "2",
-    title: "التمريض المنزلي",
-    media: serviceImg3
-  },
 
-];
 
 const RelatedServices = ({ related }) => {
 

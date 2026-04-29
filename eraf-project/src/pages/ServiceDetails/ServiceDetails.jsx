@@ -7,7 +7,6 @@ import useFetch from "../../Hooks/useFetch/useFetch";
 
 
 // Mock service images
-import serviceImg1 from "../../assets/images/services/Image.png";
 import Loading from "../../components/Loading/Loading";
 
 
@@ -16,8 +15,7 @@ import Loading from "../../components/Loading/Loading";
 const ServiceDetails = () => {
 
     const { id } = useParams();
-    const { data: services, loading } = useFetch("/api/client/services");
-    const { data: featuredServices } = useFetch(`/api/client/features/${id}`);
+    const { data: featuredServices, loading } = useFetch(`/api/client/features/${id}`);
 
     if (loading) return <Loading />;
 
