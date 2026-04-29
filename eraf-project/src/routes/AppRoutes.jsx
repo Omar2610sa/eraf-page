@@ -33,7 +33,7 @@ const AppRoutes = () => {
                     <Route path="/الخدمات" element={<Service />} />
                     <Route path="/الإدارات" element={<Departments />} />
                     <Route path="/الشروط-والأحكام" element={<Terms />} />
-                    <Route path="/سياسة-الخصوصية" element={<PrivacyPolicy />} />
+                    {/* <Route path="/سياسة-الخصوصية" element={<PrivacyPolicy />} /> */}
                     <Route path="/تواصل-معانا" element={<ContactUs />} />
                     <Route path="/404" element={<Error404 />} />
                     <Route path="/server-not-found" element={<SeverNotFound />} />
