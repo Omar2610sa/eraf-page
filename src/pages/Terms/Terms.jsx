@@ -1,107 +1,108 @@
 import Navbar from "../../components/Navbar/Navbar"
-
-
 import Footer from "../../components/Footer/Footer"
+import { useLanguage } from "../../contexts/LanguageContext.jsx"
+import { texts } from "../../utils/localization.js"
 
 const Terms = () => {
+    const { lang } = useLanguage()
+    const t = texts[lang]
+
     return (
         <section>
             <Navbar />
 
             <section className="bg-white container">
-                <div className="x mx-auto px-6 md:px-24" dir="rtl">
+                <div className="x mx-auto px-6 md:px-24" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
 
                     {/* Title */}
-                    <h1 className="text-3xl md:text-4xl font-bold text-right mb-8 text-gray-800">
-                        شروط الاستخدام
+                    <h1 className="text-3xl md:text-4xl font-bold  mb-8 text-gray-800">
+                        {t.termsTitle}
                     </h1>
 
                     {/* Intro */}
-                    <p className="text-right leading-8 mb-10 text-gray-600">
-                        مرحبًا بك في موقع شركة إراف. باستخدامك لهذا الموقع، فإنك توافق على الالتزام بالشروط والأحكام التالية. يرجى قراءة هذه الشروط بعناية قبل استخدام الموقع.
+                    <p className=" leading-8 mb-10 text-gray-600">
+                        {t.termsIntro}
                     </p>
 
-                    {/* Section */}
+                    {/* Section 1 */}
                     <div className="mb-8">
                         <h2 className="font-semibold text-lg text-gray-800 mb-3">
-                            1. قبول الشروط
+                            {t.termsSection1Title}
                         </h2>
                         <p className="leading-8 text-gray-600">
-                            إن دخولك إلى الموقع أو استخدامك لأي من خدماته يعني موافقتك الكاملة على الالتزام بشروط الاستخدام هذه، وفي حال عدم موافقتك على أي جزء منها، يُرجى عدم استخدام الموقع.
+                            {t.termsSection1Content}
                         </p>
                     </div>
 
-                    {/* Section */}
+                    {/* Section 2 */}
                     <div className="mb-8">
                         <h2 className="font-semibold text-lg text-gray-800 mb-3">
-                            2. استخدام الموقع
+                            {t.termsSection2Title}
                         </h2>
                         <p className="leading-8 text-gray-600 mb-3">
-                            يُسمح باستخدام الموقع للأغراض المشروعة فقط، ويُمنع استخدامه بأي طريقة قد تؤدي إلى:
+                            {t.termsSection2Content}
                         </p>
 
                         <ul className="list-disc pr-6 space-y-2 text-gray-600">
-                            <li>انتهاك حقوق الموقع أو تعطيله أو التأثير على أدائه</li>
-                            <li>إرسال بيانات أو ملفات ضارة أو فيروسات</li>
-                            <li>إساءة استخدام نماذج التواصل أو إرسال معلومات مضللة</li>
-                            <li>محاولة الوصول غير المصرح به إلى أنظمة الموقع أو بياناته</li>
+                            {t.termsSection2List?.map((item, index) => (
+                                <li key={index}>{item}</li>
+                            ))}
                         </ul>
                     </div>
 
-                    {/* Section */}
+                    {/* Section 3 */}
                     <div className="mb-8">
                         <h2 className="font-semibold text-lg text-gray-800 mb-3">
-                            3. المحتوى والمعلومات
+                            {t.termsSection3Title}
                         </h2>
                         <p className="leading-8 text-gray-600">
-                            جميع المعلومات والمحتويات المعروضة على الموقع، بما في ذلك النصوص والصور والتصاميم والشعارات والخدمات، هي ملك لشركة إراف أو مرخصة لها، ولا يجوز نسخها أو إعادة استخدامها أو نشرها دون إذن مسبق.
+                            {t.termsSection3Content}
                         </p>
                     </div>
 
-                    {/* Section */}
+                    {/* Section 4 */}
                     <div className="mb-8">
                         <h2 className="font-semibold text-lg text-gray-800 mb-3">
-                            4. دقة المعلومات
+                            {t.termsSection4Title}
                         </h2>
                         <p className="leading-8 text-gray-600">
-                            تحرص شركة إراف على أن تكون جميع المعلومات المعروضة دقيقة ومحدثة قدر الإمكان، ومع ذلك لا نضمن خلو المحتوى من الأخطاء أو اكتماله بشكل دائم، ونحتفظ بحق تعديل أو تحديث المحتوى في أي وقت دون إشعار مسبق.
+                            {t.termsSection4Content}
                         </p>
                     </div>
 
-                    {/* Section */}
+                    {/* Section 5 */}
                     <div className="mb-8">
                         <h2 className="font-semibold text-lg text-gray-800 mb-3">
-                            5. الخدمات والمواعيد
+                            {t.termsSection5Title}
                         </h2>
                         <p className="leading-8 text-gray-600">
-                            أي طلب يتم تقديمه عبر الموقع للحصول على خدمة أو استفسار لا يعد تأكيدًا نهائيًا لتقديم الخدمة إلا بعد مراجعة الطلب والتواصل مع المستخدم من قبل فريق العمل.
+                            {t.termsSection5Content}
                         </p>
                     </div>
 
-                    {/* Section */}
+                    {/* Section 6 */}
                     <div className="mb-8">
                         <h2 className="font-semibold text-lg text-gray-800 mb-3">
-                            6. المسؤولية
+                            {t.termsSection6Title}
                         </h2>
                         <p className="leading-8 text-gray-600 mb-3">
-                            نحن نسعى لتقديم تجربة استخدام موثوقة، إلا أننا لا نتحمل المسؤولية عن:
+                            {t.termsSection6Content}
                         </p>
 
                         <ul className="list-disc pr-6 space-y-2 text-gray-600">
-                            <li>أي أعطال فنية مؤقتة في الموقع</li>
-                            <li>انقطاع الخدمة بسبب الصيانة أو التحديثات</li>
-                            <li>أي استخدام غير صحيح للمعلومات الواردة في الموقع</li>
-                            <li>أي أضرار غير مباشرة تنتج عن سوء استخدام الموقع</li>
+                            {t.termsSection6List?.map((item, index) => (
+                                <li key={index}>{item}</li>
+                            ))}
                         </ul>
                     </div>
 
-                    {/* Section */}
+                    {/* Section 7 */}
                     <div>
                         <h2 className="font-semibold text-lg text-gray-800 mb-3">
-                            7. التعديلات على الشروط
+                            {t.termsSection7Title}
                         </h2>
                         <p className="leading-8 text-gray-600">
-                            تحتفظ شركة إراف بالحق في تعديل أو تحديث شروط الاستخدام في أي وقت، وتصبح التعديلات نافذة فور نشرها على هذه الصفحة، ويعد استمرارك في استخدام الموقع بعد التحديث موافقة ضمنية على الشروط المعدلة.
+                            {t.termsSection7Content}
                         </p>
                     </div>
 
