@@ -11,7 +11,7 @@ const ScrollTop = lazy(() => import("../components/ScrollTop/ScrollTop"));
 const Departments = lazy(() => import("../pages/Departments/Departments"));
 const Terms = lazy(() => import("../pages/Terms/Terms"));
 
-import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy.jsx";
+import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
 
 
 const Error404 = lazy(() => import("../components/Error404/Error404"));
