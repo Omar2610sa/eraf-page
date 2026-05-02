@@ -74,7 +74,7 @@ const BlogDetails = () => {
                         {featuredServices?.title}
                     </h2>
 
-                    <img src={featuredServices?.media?.media_url} className="w-full my-10 md:h-[600px] object-contain" alt="" />
+                    <img src={featuredServices?.media?.media_url} className="w-full my-10 md:h-[600px] object-cover" alt="" />
 
                     {/* Description */}
                     <div className="px-4 py-6 relative">
