@@ -69,7 +69,10 @@ export const texts = {
     fillterAll: 'الكل',
     fillterTech: 'مقالات تقنية',
     fillterCompany: 'اخبار الشركة',
-    fillterUpdates: 'أخر المستجدات'
+    fillterUpdates: 'أخر المستجدات',
+    relatedTopics: 'مواضيع ذات صلة',
+    discoverMore: 'استكشف المزيد',
+    loading: 'تحميل',
   },
   en: {
     home: 'Home',
@@ -136,7 +139,10 @@ export const texts = {
     fillterAll: 'All',
     fillterTech: 'Technical articles',
     fillterCompany: 'Company News',
-    fillterUpdates: 'Latest Updates'
+    fillterUpdates: 'Latest Updates',
+    relatedTopics: 'Related Topics',
+    discoverMore: 'Discover More',
+    loading: 'Loading',
   }
 };
 

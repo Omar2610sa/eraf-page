@@ -5,8 +5,11 @@ import NorthWestIcon from '@mui/icons-material/NorthWest';
 import Card from "../../components/Blogs/Blog/Blog";
 import { Link } from "react-router-dom";
 
+import { useLanguage } from "../../contexts/LanguageContext.jsx";
+import { texts } from "../../utils/localization.js";
 
 const RelatedTopics = ({related}) => {
+    const { lang } = useLanguage();
     return (
         <section className='container '>
 
@@ -16,12 +19,12 @@ const RelatedTopics = ({related}) => {
                 <div className="flex justify-between items-start md:items-end flex-col gap-6 md:flex-row ">
                     {/* Title Content */}
                     <div>
-                        <h2 className="text-primry text-[32px] md:text-[48px]">مواضيع ذات صلة</h2>
+                        <h2 className="text-primry text-[32px] md:text-[48px]">{texts[lang].relatedTopics}</h2>
                     </div>
 
                     {/* Title Btn */}
                     <Link to="/المدونة">
-                        <button className="title-btn"> استكشف المزيد<NorthWestIcon /></button>
+                        <button className="title-btn"> {texts[lang].discoverMore}<NorthWestIcon /></button>
                     </Link>
                 </div>
 

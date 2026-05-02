@@ -65,15 +65,18 @@ const Footer = () => {
                         <div data-aos="fade-down" className="flex flex-col gap-8 ">
                             <h2 className="text-xl ">{texts[lang].contactInfo || 'معلومات التواصل'}</h2>
                             <div className="flex flex-col gap-6">
-                                <div className="flex">
-                                    <img src={tel} className="ml-2 w-6 h-6" alt="phone" loading="lazy" />
-                                    +966 0500012454
+                                <div className="flex gap-2">
+                                    <img src={tel} className="w-6 h-6" alt="phone" loading="lazy" />
+                                    <span>
+                                        +966 0500012454
+                                        </span>
                                 </div>
-                                <div className="flex">
-                                    <img src={email} className="ml-2 w-6 h-6" alt="email" loading="lazy" />info@araf.com
+                                <div className="flex gap-2">
+                                    <img src={email} className=" w-6 h-6" alt="email" loading="lazy" />info@araf.com
                                 </div>
-                                <div className="flex">
-                                    <img src={location} className="ml-2 w-6 h-6" alt="location" loading="lazy" />الرياض، المملكة العربية السعودية
+                                <div className="flex gap-2">
+                                    <img src={location} className=" w-6 h-6" alt="location" loading="lazy" />
+                                    {texts[lang].riyadhAddress || 'الرياض، المملكة العربية السعودية'}
                                 </div>
                             </div>
                         </div>

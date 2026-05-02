@@ -12,7 +12,7 @@ const CallUs = ({ callUs }) => {
     const { lang } = useLanguage();
 
     return (
-        <section className='relative bg-gradient-to-r from-[#606769] to-[#299FB6]'>
+        <section dir='rtl' className='relative bg-gradient-to-r from-[#606769] to-[#299FB6]'>
 
             {/* <!-- Circular "Left" --> */}
             <div class="absolute left-0  flex flex-col items-end gap-2  pointer-events-none select-none">
