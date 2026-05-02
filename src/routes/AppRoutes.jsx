@@ -10,7 +10,10 @@ const ContactUs = lazy(() => import("../pages/ContactUs/ContactUs"));
 const ScrollTop = lazy(() => import("../components/ScrollTop/ScrollTop"));
 const Departments = lazy(() => import("../pages/Departments/Departments"));
 const Terms = lazy(() => import("../pages/Terms/Terms"));
-const PrivacyPolicy = lazy(() => import("../pages/PrivacyPolicy/PrivacyPolicy.jsx"));
+
+import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy.jsx";
+
+
 const Error404 = lazy(() => import("../components/Error404/Error404"));
 const SeverNotFound = lazy(() => import("../SeverNotFound/SeverNotFound"));
 const JoinUs = lazy(() => import("../pages/JoinUs.jsx/JoinUs"));
