@@ -53,7 +53,7 @@ const Service = () => {
     console.log(services);
     if (loading) return <Loading />;
 
-return (
+    return (
         <main>
             <Navbar />
 
@@ -85,6 +85,7 @@ return (
                                 size="large"
                                 color="primary"
                                 siblingCount={isMobile ? 0 : 1}
+                                dir="ltr"
                             />
 
                         </ThemeProvider>

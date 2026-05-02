@@ -217,3 +217,35 @@ body {
 .animate-slide-down {
   animation: slideDown 3s ease-in-out infinite;
 }
+
+/* Shadow animations */
+@keyframes opacity-light {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes opacity-light-2{
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+.animate-opacity-light {
+  animation: opacity-light 3s ease-in-out infinite;
+}
+.animate-opacity-light-2 {
+  animation: opacity-light-2 2s ease-in-out infinite;
+}

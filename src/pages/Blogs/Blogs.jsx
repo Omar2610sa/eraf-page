@@ -140,6 +140,7 @@ const Blogs = () => {
                                         size="large"
                                         color="primary"
                                         siblingCount={isMobile ? 0 : 1}
+                                        dir="ltr"
                                     />
                                 );
                             })()}
